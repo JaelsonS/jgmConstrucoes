@@ -26,7 +26,7 @@ Ficheiros em `src/test/`:
 2. **Idioma:** mudar bandeira a meio de um serviço → slug traduzido.
 3. **Formulário:** sem env vars → erro; com env vars → aceite pelo fornecedor (não confundir com entrega na inbox).
 4. **Consentimento:** mapa só após “carregar mapa” / aceitar externos; botão esquerdo reabre preferências de cookies.
-5. **Assistente:** idioma → fluxo → resumo → WhatsApp; contacto direto sem questionário; ver [`SALES-ASSISTANT-AND-CONSENT.md`](SALES-ASSISTANT-AND-CONSENT.md).
+5. **Assistente:** idioma → fluxo → resumo → WhatsApp; contacto direto sem questionário; ver [`SALES-ASSISTANT-AND-CONSENT.md`](SALES-ASSISTANT-AND-CONSENT.md). Após alterações, repetir o checklist da secção «Auditoria QA» desse documento.
 6. **Animação:** scroll na homepage; com “reduce motion” → estágio final estático.
 7. **Responsivo:** 320, 390, 768, 1440.
 8. **Teclado:** menu, FAQ, formulário, skip link, assistente, preferências de cookies.

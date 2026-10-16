@@ -280,7 +280,7 @@ export function SalesAssistant() {
         return (
           <div className="space-y-3">
             <p className="text-sm font-semibold">{t.needPrompt}</p>
-            <div className="max-h-56 space-y-2 overflow-y-auto pr-1">
+            <div className="space-y-2 pr-1">
               {t.needServiceOrder.map((id) => (
                 <OptionButton key={id} onClick={() => update(selectNeed(state, id as NeedId))}>
                   {serviceNames[id].name}
@@ -477,7 +477,7 @@ export function SalesAssistant() {
                 {t.whatsappOpenedNote}
               </p>
             )}
-            <OptionButton onClick={() => update(jumpToStep(state, "summary"))}>
+            <OptionButton onClick={() => update(goBack(state))}>
               {t.back}
             </OptionButton>
           </div>
@@ -495,9 +495,9 @@ export function SalesAssistant() {
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
-          className="pointer-events-auto flex max-h-[min(70vh,34rem)] w-[min(100vw-2rem,22rem)] flex-col overflow-hidden rounded-sm border border-border bg-background shadow-2xl"
+          className="pointer-events-auto flex max-h-[min(70dvh,34rem)] w-[min(100vw-2rem,22rem)] flex-col overflow-hidden rounded-sm border border-border bg-background shadow-2xl"
         >
-          <header className="flex items-start justify-between gap-3 border-b border-border bg-ink px-4 py-3 text-ink-foreground">
+          <header className="flex shrink-0 items-start justify-between gap-3 border-b border-border bg-ink px-4 py-3 text-ink-foreground">
             <div>
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-sky">
                 {t.badge}
@@ -516,9 +516,9 @@ export function SalesAssistant() {
             </button>
           </header>
 
-          <div className="flex-1 overflow-y-auto px-4 py-4">{renderStep()}</div>
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-4">{renderStep()}</div>
 
-          <footer className="space-y-2 border-t border-border px-3 py-3">
+          <footer className="shrink-0 space-y-2 border-t border-border px-3 py-3">
             <div className="flex flex-wrap gap-1">
               {state.history.length > 0 && state.step !== "language" && (
                 <button
@@ -580,7 +580,7 @@ export function SalesAssistant() {
       <button
         type="button"
         className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-sm border border-border bg-ink text-ink-foreground shadow-lg transition hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-        aria-label={open ? ui.launcher.close : ui.launcher.open}
+        aria-label={open ? t.launcher.close : ui.launcher.open}
         aria-expanded={open}
         aria-controls={open ? titleId : undefined}
         onClick={() => setOpen((v) => !v)}

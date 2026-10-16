@@ -11,6 +11,13 @@ Registo das alterações desta passagem de produto (outubro 2026). Distingue tip
 - Testes: `src/test/assistant-and-consent.test.ts`.
 - **Não publicado automaticamente em produção.**
 
+## Auditoria QA end-to-end (passagem seguinte)
+
+- Browser local PT/EN/ES: fluxo completo, WhatsApp URL, cookies/mapa, redes, responsivo 320–1440.
+- Correções: scroll do painel (`min-h-0`), regresso preview→resumo, telefone schema via `CONTACTS`, flash SSR do banner.
+- Testes alargados: `src/test/assistant-qa.test.ts` (32 testes no total).
+- `npm run check` aprovado em ambiente local — **não implica produção**.
+
 ## Conteúdo e marca
 
 - Reposicionamento editorial: sede em Adémia/Coimbra sem limitar a marca a “só Coimbra”.

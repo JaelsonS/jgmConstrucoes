@@ -122,9 +122,9 @@ export function changeLanguage(): AssistantState {
   };
 }
 
-/** Passos editáveis a partir do resumo. */
+/** Salto explícito para um passo (ex.: corrigir respostas a partir do resumo). */
 export function jumpToStep(state: AssistantState, step: AssistantStep): AssistantState {
-  if (step === "summary" || step === "preview") return state;
+  if (step === state.step) return state;
   return go(state, step, state.answers);
 }
 

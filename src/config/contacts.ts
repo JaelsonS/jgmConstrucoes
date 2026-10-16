@@ -13,6 +13,11 @@ export const CONTACTS = {
   },
 } as const;
 
+/** E.164 com `+`, para schema.org e ligações `tel:`. */
+export function whatsappTelUri() {
+  return `+${CONTACTS.whatsappE164Digits}` as const;
+}
+
 export function hasWhatsAppConfigured() {
   return CONTACTS.whatsappE164Digits.length >= 8;
 }

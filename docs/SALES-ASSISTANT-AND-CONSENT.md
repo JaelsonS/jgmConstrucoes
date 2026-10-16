@@ -136,6 +136,33 @@ Manual (browser):
 4. Footer → Instagram e Facebook → perfis corretos.
 5. `/pt`, `/en`, `/es` → controlos e labels no idioma da página (exceto conversa do assistente após escolha).
 
+## Auditoria QA (outubro 2026)
+
+Ambiente: `npm run dev` em `127.0.0.1` (não produção). Ver relatório em canvas e `docs/CHANGELOG.md`.
+
+### Corrigido nesta auditoria
+
+1. **Scroll do assistente em ecrãs estreitos** — `min-h-0` no painel; opções deixaram de ficar sob o rodapé.
+2. **Voltar da pré-visualização** — `jumpToStep` bloqueava o regresso ao resumo; corrigido + `goBack` no botão.
+3. **Telefone no JSON-LD** — alinhado a `whatsappTelUri()` / `CONTACTS` (já não hardcoded).
+4. **Flash do banner de cookies no SSR** — painel só após montagem no cliente quando a escolha já existe.
+5. **Label do FAB** — ao fechar, usa o idioma da conversa.
+
+### Verificado no browser (local)
+
+- Fluxos PT / EN / ES até pré-visualização WhatsApp e `window.open` com URL correta.
+- Campos opcionais omitidos; acentos e quebras preservados na URL.
+- Consentimento: reabrir, ativar mapa (iframe), retirar (iframe removido).
+- Persistência `sessionStorage` ao fechar/reabrir e ao mudar de rota.
+- Controlos em 320 / 390 / 1440 sem sobreposição nem scroll horizontal.
+
+### Não verificado integralmente
+
+- Entrega real de mensagens no WhatsApp da empresa (titularidade / inbox).
+- Titularidade dos perfis Instagram/Facebook além da URL configurada.
+- Conformidade jurídica do consentimento.
+- Produção / CDN / dispositivos físicos reais.
+
 ## Limitações conhecidas
 
 - O assistente não confirma envio da mensagem WhatsApp (não há webhook).

@@ -112,6 +112,12 @@ export function ConsentManager() {
   const [manualOpen, setManualOpen] = useState(false);
   const [customising, setCustomising] = useState(false);
   const [external, setExternal] = useState(false);
+  /** Cliente montado — evita flash do banner SSR quando a escolha já está no localStorage. */
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   useEffect(() => {
     const show = () => {
@@ -124,7 +130,7 @@ export function ConsentManager() {
   }, []);
 
   const hasStoredChoice = preferences !== null;
-  const panelOpen = manualOpen || !hasStoredChoice;
+  const panelOpen = mounted && (manualOpen || !hasStoredChoice);
 
   const choose = (value: boolean) => {
     persist({ necessary: true, external: value });

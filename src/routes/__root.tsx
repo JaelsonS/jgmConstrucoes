@@ -16,6 +16,7 @@ import sora700 from "@fontsource/sora/files/sora-latin-700-normal.woff2?url";
 import sora700Ext from "@fontsource/sora/files/sora-latin-ext-700-normal.woff2?url";
 import { reportLovableError } from "../lib/error";
 import { SITE_CONFIG } from "../config/site";
+import { whatsappTelUri } from "../config/contacts";
 import { DICT, isLang, type Lang } from "../i18n/content";
 
 const SITE = SITE_CONFIG.canonicalOrigin;
@@ -130,7 +131,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           legalName: "JGM - Remodelações e Pinturas, Unipessoal Lda.",
           url: "https://jgmconstrucoes.com",
           taxID: "517470942",
-          telephone: "+351911040509",
+          telephone: whatsappTelUri(),
           sameAs: [
             SITE_CONFIG.socialUrls.instagram,
             SITE_CONFIG.socialUrls.facebook,
