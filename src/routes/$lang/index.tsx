@@ -214,12 +214,11 @@ function Home() {
       <div ref={storyRef}>
       <BuildBackdrop lang={lang} subscribe={subscribe} visible={visible} reduced={reduced} />
 
-      <section data-header-overlay className="relative flex min-h-screen items-end pb-20 text-ink-foreground">
-        <div className="container-x relative animate-rise">
-          <p className="font-display text-sm font-semibold uppercase tracking-[0.22em] text-sky md:text-base">{t.brand}</p>
-          <p className="mt-3 text-xs font-medium uppercase tracking-widest text-ink-muted md:text-sm">{t.eyebrow}</p>
+      <section data-header-overlay className="relative flex min-h-screen flex-col justify-end pb-20 pt-28 text-ink-foreground md:pt-32">
+        <div className="container-x relative z-0 animate-rise">
+          <p className="eyebrow text-sky">{t.eyebrow}</p>
           <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.05] md:text-7xl">{t.h1}</h1>
-          <p className="mt-6 max-w-2xl text-lg text-ink-foreground">{t.sub}</p>
+          <p className="mt-6 max-w-2xl text-lg text-ink-foreground/95">{t.sub}</p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a href={pageHref(lang, "contact")} className="btn btn-primary">{t.cta1} <ArrowRight aria-hidden="true" size={18} /></a>
             <a href={pageHref(lang, "services")} className="btn btn-ghost-light">{t.cta2}</a>

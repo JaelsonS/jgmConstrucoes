@@ -156,14 +156,14 @@ export function Header() {
   const light = !scrolled && !open;
   const navText = light ? "text-white drop-shadow-sm hover:text-sky" : "text-foreground hover:text-primary";
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${scrolled || open ? "border-border bg-background/95 shadow-sm backdrop-blur-xl" : "border-transparent bg-transparent"}`}>
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:bg-background focus:p-2">{t.skip}</a>
-      <div className="container-x flex min-h-[4.5rem] items-center justify-between gap-4 py-3 md:min-h-[5rem]">
-        <Link to="/$lang" params={{ lang }} aria-label="JGM Construções" className="min-w-0 shrink">
+    <header className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${scrolled || open ? "border-border bg-background/95 shadow-sm backdrop-blur-xl" : "border-transparent bg-gradient-to-b from-ink/70 to-transparent"}`}>
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-background focus:p-2">{t.skip}</a>
+      <div className="container-x flex min-h-[4.5rem] items-center gap-4 py-3 md:min-h-[5rem] lg:gap-6">
+        <Link to="/$lang" params={{ lang }} aria-label="JGM Construções" className="relative z-10 shrink-0">
           <Logo light={light} />
         </Link>
-        <nav className="hidden items-center gap-8 lg:flex" aria-label={t.menu}>
-          {links.slice(0, 2).map((x) => <a key={x.to} href={x.to} className={`text-[15px] font-semibold transition-colors ${navText}`}>{x.l}</a>)}
+        <nav className="relative z-10 ml-auto hidden items-center gap-6 xl:gap-8 lg:flex" aria-label={t.menu}>
+          {links.slice(0, 2).map((x) => <a key={x.to} href={x.to} className={`whitespace-nowrap text-[15px] font-semibold transition-colors ${navText}`}>{x.l}</a>)}
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -184,24 +184,24 @@ export function Header() {
               }}
               aria-expanded={servicesOpen}
               aria-controls="services-dropdown"
-              className={`flex items-center gap-1 text-[15px] font-semibold transition-colors ${navText}`}
+              className={`flex items-center gap-1 whitespace-nowrap text-[15px] font-semibold transition-colors ${navText}`}
             >
               {t.services}<ChevronDown aria-hidden="true" size={15} className={`transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
             </button>
-            {servicesOpen && <div id="services-dropdown" className="absolute left-0 top-full min-w-72 pt-3">
+            {servicesOpen && <div id="services-dropdown" className="absolute left-0 top-full z-50 min-w-72 pt-3">
               <div className="max-h-[70vh] overflow-y-auto rounded-sm border border-border bg-background p-2 shadow-2xl">
                 <a href={pageHref(lang, "services")} className="block rounded-sm px-3 py-2 text-sm font-bold text-foreground hover:bg-card hover:text-primary">{t.services}</a>
                 {SERVICE_IDS.map((service) => <a key={service} href={serviceHref(lang, service)} className="block rounded-sm px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-card hover:text-primary">{DICT[lang].services[service].name}</a>)}
               </div>
             </div>}
           </div>
-          {links.slice(2).map((x) => <a key={x.to} href={x.to} className={`text-[15px] font-semibold transition-colors ${navText}`}>{x.l}</a>)}
+          {links.slice(2).map((x) => <a key={x.to} href={x.to} className={`whitespace-nowrap text-[15px] font-semibold transition-colors ${navText}`}>{x.l}</a>)}
         </nav>
-        <div className="hidden items-center gap-4 lg:flex">
+        <div className="relative z-10 hidden shrink-0 items-center gap-3 lg:flex">
           <LangSwitch light={light} />
           <a href={pageHref(lang, "contact")} className="btn btn-primary min-h-10 px-4 text-sm">{t.quote}</a>
         </div>
-        <button className={`min-h-11 min-w-11 lg:hidden ${light ? "text-white" : "text-foreground"}`} onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? t.close : t.menu}>
+        <button className={`relative z-10 ml-auto min-h-11 min-w-11 shrink-0 lg:hidden ${light ? "text-white" : "text-foreground"}`} onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? t.close : t.menu}>
           {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </div>
