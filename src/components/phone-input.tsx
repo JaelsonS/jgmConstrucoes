@@ -101,6 +101,7 @@ export function PhoneInput({
   const onNationalChange = (event: ChangeEvent<HTMLInputElement>) => {
     const next = event.target.value;
     setNational(next);
+    if (next.trim().length > 0) setTouched(true);
     emit(next, country);
   };
 
