@@ -92,6 +92,7 @@ O deploy na Vercel conclui com sucesso. Alguns avisos podem continuar a aparecer
 | `engines.node` | Resolvido: pinado em `24.x` (alinhado à Vercel) + `.nvmrc` | Usar Node 24 no projeto |
 | `vite-tsconfig-paths` / `tsconfck` | Preset Lovable (interno) | Aguardar correção upstream; não afeta runtime |
 | `eslint deprecated` | Resolvido: ESLint 10 | — |
-| `Unknown env config "cache-dir"` | Ambiente npm da Vercel/local | Fora do repositório; ignorar |
+| `Unknown env config "cache-dir"` | Variável de ambiente da Vercel/CI (`npm_config_cache_dir`) | Mitigado em `vercel.json` com `env -u`; não afeta o runtime |
+| `tsconfck unmaintained` | Preset Lovable → `vite-tsconfig-paths` | Não removível sem sair do preset; aviso inofensivo |
 
 Foram removidos os avisos de `abab` / `domexception` / `whatwg-encoding` ao atualizar `jsdom` (apenas testes).

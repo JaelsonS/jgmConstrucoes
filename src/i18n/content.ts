@@ -192,7 +192,7 @@ const pt: Dict = {
     lsf: {
       name: "Construção LSF", short: "Estruturas em aço leve para moradias e edifícios, com construção seca e precisa.",
       title: "Construção em Light Steel Frame (LSF) em Coimbra — JGM",
-      metaDesc: "O que é a construção LSF, como funciona e como a JGM Construções executa moradias e edifícios em Light Steel Frame em Coimbra.",
+      metaDesc: "O que é a construção LSF, como funciona e como a JGM Construções executa moradias e edifícios em Light Steel Frame (LSF) em Coimbra.",
       intro: "O Light Steel Frame é um sistema construtivo em que a estrutura do edifício é formada por perfis de aço leve galvanizado. Depois de montada, a estrutura é fechada com placas, isolamento e acabamentos, resultando numa construção em que a obra decorre de forma mais seca e organizada.",
       problems: ["Necessidade de uma alternativa à construção tradicional", "Ampliações onde o peso da estrutura é uma preocupação", "Projetos que exigem planeamento rigoroso de cada fase"],
       benefits: ["Estrutura leve, adequada também a ampliações", "Processo construtivo seco e mais limpo em obra", "Elevado controlo dimensional dos elementos", "Compatível com diferentes acabamentos exteriores e interiores"],
@@ -356,7 +356,7 @@ const en: Dict = {
       name: "LSF construction", short: "Light steel structures for houses and buildings, with dry and precise construction.",
       title: "Light Steel Frame (LSF) construction in Coimbra — JGM",
       metaDesc: "What LSF construction is, how it works and how JGM Construções builds Light Steel Frame houses and buildings in Coimbra.",
-      intro: "Light Steel Frame is a building system in which the structure is made of galvanised light steel profiles. Once erected, the frame is closed with boards, insulation and finishes, resulting in a drier and more organised building site.",
+      intro: "Light Steel Frame (LSF) is a building system in which the structure is made of galvanised light steel profiles. Once erected, the frame is closed with boards, insulation and finishes, resulting in a drier and more organised building site.",
       problems: ["Looking for an alternative to traditional construction", "Extensions where structural weight is a concern", "Projects that require careful planning of every stage"],
       benefits: ["Lightweight structure, also suited to extensions", "Dry, cleaner construction process on site", "High dimensional control of components", "Compatible with a range of exterior and interior finishes"],
       steps: [{ t: "Project review", d: "Studying the design and site conditions." }, { t: "Foundation", d: "Building the base that supports the frame." }, { t: "Structure", d: "Assembling the light steel profiles." }, { t: "Closing and finishes", d: "Boards, insulation, coverings and paint." }],
@@ -512,7 +512,7 @@ const es: Dict = {
     lsf: {
       name: "Construcción LSF", short: "Estructuras de acero ligero para viviendas y edificios, con construcción en seco y precisa.",
       title: "Construcción en Light Steel Frame (LSF) en Coímbra — JGM",
-      metaDesc: "Qué es la construcción LSF, cómo funciona y cómo JGM Construções ejecuta viviendas y edificios en Light Steel Frame en Coímbra.",
+      metaDesc: "Qué es la construcción LSF, cómo funciona y cómo JGM Construções ejecuta viviendas y edificios en Light Steel Frame (LSF) en Coímbra.",
       intro: "El Light Steel Frame es un sistema constructivo en el que la estructura del edificio está formada por perfiles de acero ligero galvanizado. Una vez montada, la estructura se cierra con placas, aislamiento y acabados, dando lugar a una obra más seca y organizada.",
       problems: ["Búsqueda de una alternativa a la construcción tradicional", "Ampliaciones en las que el peso de la estructura es una preocupación", "Proyectos que exigen una planificación rigurosa de cada fase"],
       benefits: ["Estructura ligera, adecuada también para ampliaciones", "Proceso constructivo en seco y más limpio en obra", "Alto control dimensional de los elementos", "Compatible con distintos acabados exteriores e interiores"],
