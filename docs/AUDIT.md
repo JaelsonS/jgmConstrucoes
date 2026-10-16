@@ -83,4 +83,16 @@ Não foram executados testes intrusivos, entregas reais de email, deploy, altera
 - Headers locais: CSP, `nosniff`, `Referrer-Policy`, `Permissions-Policy` e `frame-ancestors` presentes.
 - IDE diagnostics: nenhum erro encontrado nos ficheiros do projeto.
 
-O build mantém dois avisos do preset Lovable/Nitro: uso interno de `vite-tsconfig-paths` já redundante no Vite 8 e combinação de opções Rollup no bundle Cloudflare. Não impedem o build e não são originados por imports do projeto; devem ser reavaliados quando o preset publicar a respetiva correção.
+### Avisos de build (não bloqueantes)
+
+O deploy na Vercel conclui com sucesso. Alguns avisos podem continuar a aparecer e **não travam** o sistema:
+
+| Aviso | Origem | Ação |
+| --- | --- | --- |
+| `engines.node` | Resolvido: pinado em `22.x` + `.nvmrc` | Usar Node 22 no projeto |
+| `vite-tsconfig-paths` | Preset Lovable (interno) | Aguardar correção upstream; não afeta runtime |
+| `eslint@9 deprecated` | Ecossistema npm / ciclo de vida | Manter até `typescript-eslint` alinhar com ESLint 10 |
+| `Unknown env config "cache-dir"` | Ambiente npm da Vercel/local | Fora do repositório; ignorar |
+| `tsconfck unmaintained` | Dependência transitiva de `vite-tsconfig-paths` | Preset Lovable |
+
+Foram removidos os avisos de `abab` / `domexception` / `whatwg-encoding` ao atualizar `jsdom` (apenas testes).
