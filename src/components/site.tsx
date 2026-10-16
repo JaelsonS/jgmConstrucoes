@@ -156,7 +156,7 @@ export function Header() {
   const light = !scrolled && !open;
   const navText = light ? "text-white drop-shadow-sm hover:text-sky" : "text-foreground hover:text-primary";
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${scrolled || open ? "border-border bg-background/95 shadow-sm backdrop-blur-xl" : "border-transparent bg-gradient-to-b from-ink/70 to-transparent"}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 border-b transition-all duration-300 ${scrolled || open ? "border-border bg-background/95 shadow-sm backdrop-blur-xl" : "border-transparent bg-transparent"}`}>
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-background focus:p-2">{t.skip}</a>
       <div className="container-x flex min-h-[4.5rem] items-center gap-4 py-3 md:min-h-[5rem] lg:gap-6">
         <Link to="/$lang" params={{ lang }} aria-label="JGM Construções" className="relative z-10 shrink-0">
