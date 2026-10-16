@@ -227,24 +227,25 @@ function Contact({ lang }: { lang: Lang }) {
     }
   };
   const field = "mt-2 w-full rounded-sm border border-input bg-background px-4 py-3 outline-none focus:border-primary";
-  const Err = ({ n }: { n: string }) => errors[n] ? <p id={`${n}-err`} className="mt-1 text-sm text-destructive">{errors[n]}</p> : null;
+  const fieldError = (n: string) =>
+    errors[n] ? <p id={`${n}-err`} className="mt-1 text-sm text-destructive">{errors[n]}</p> : null;
   return (<>
     <PageHero label={t.contact.label} h1={t.contact.h1} lead={t.contact.lead} img={s4} />
     <section className="container-x grid gap-14 py-24 md:grid-cols-3">
       <form onSubmit={submit} noValidate className="grid gap-6 md:col-span-2 md:grid-cols-2">
         <div className="absolute -left-[9999px]" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
-        <label className="text-sm font-semibold">{f.name} *<input name="name" autoComplete="name" maxLength={120} className={field} aria-invalid={!!errors["name"]} aria-describedby={errors["name"] ? "name-err" : undefined} /><Err n="name" /></label>
-        <label className="text-sm font-semibold">{f.email} *<input name="email" type="email" autoComplete="email" maxLength={254} className={field} aria-invalid={!!errors["email"]} aria-describedby={errors["email"] ? "email-err" : undefined} /><Err n="email" /></label>
+        <label className="text-sm font-semibold">{f.name} *<input name="name" autoComplete="name" maxLength={120} className={field} aria-invalid={!!errors["name"]} aria-describedby={errors["name"] ? "name-err" : undefined} />{fieldError("name")}</label>
+        <label className="text-sm font-semibold">{f.email} *<input name="email" type="email" autoComplete="email" maxLength={254} className={field} aria-invalid={!!errors["email"]} aria-describedby={errors["email"] ? "email-err" : undefined} />{fieldError("email")}</label>
         <label className="text-sm font-semibold">{f.phone} <span className="font-normal text-muted-foreground">({f.optional})</span><input name="phone" type="tel" autoComplete="tel" maxLength={40} className={field} /></label>
         <label className="text-sm font-semibold">{f.service} *
           <select name="service" defaultValue="" className={field} aria-invalid={!!errors["service"]} aria-describedby={errors["service"] ? "service-err" : undefined}>
             <option value="" disabled>{f.choose}</option>
             {SERVICE_IDS.map((s) => <option key={s} value={s}>{t.services[s].name}</option>)}
             <option value="other">{f.other}</option>
-          </select><Err n="service" />
+          </select>{fieldError("service")}
         </label>
         <label className="text-sm font-semibold md:col-span-2">{f.location} <span className="font-normal text-muted-foreground">({f.optional})</span><input name="location" maxLength={160} className={field} /></label>
-        <label className="text-sm font-semibold md:col-span-2">{f.message} *<textarea name="message" rows={6} maxLength={3000} className={field} aria-invalid={!!errors["message"]} aria-describedby={errors["message"] ? "message-err" : undefined} /><Err n="message" /></label>
+        <label className="text-sm font-semibold md:col-span-2">{f.message} *<textarea name="message" rows={6} maxLength={3000} className={field} aria-invalid={!!errors["message"]} aria-describedby={errors["message"] ? "message-err" : undefined} />{fieldError("message")}</label>
         <p className="text-xs text-muted-foreground md:col-span-2">{f.privacy} <a className="underline hover:text-primary" href={pageHref(lang, "privacy")}>{DICT[lang].footer.privacy}</a></p>
         <div className="md:col-span-2">
           <button className="btn btn-primary" disabled={status === "sending"}>{status === "sending" ? <LoaderCircle aria-hidden="true" size={18} className="animate-spin" /> : <ArrowRight aria-hidden="true" size={18} />}{status === "sending" ? messages.sending : f.submit}</button>

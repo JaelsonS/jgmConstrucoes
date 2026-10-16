@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { Settings2, X } from "lucide-react";
 import { useParams } from "@tanstack/react-router";
 import { isLang, type Lang } from "@/i18n/content";
@@ -6,6 +6,7 @@ import { EXTRA_CONTENT } from "@/i18n/extended-content";
 
 const STORAGE_KEY = "jgm-consent-v1";
 const CONSENT_EVENT = "jgm-consent-change";
+const OPEN_EVENT = "jgm-consent-open";
 
 export type ConsentPreferences = {
   necessary: true;
@@ -24,22 +25,22 @@ function readPreferences(): ConsentPreferences | null {
   }
 }
 
+function subscribePreferences(onChange: () => void) {
+  window.addEventListener(CONSENT_EVENT, onChange);
+  window.addEventListener("storage", onChange);
+  return () => {
+    window.removeEventListener(CONSENT_EVENT, onChange);
+    window.removeEventListener("storage", onChange);
+  };
+}
+
 function persist(preferences: ConsentPreferences) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
   window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: preferences }));
 }
 
 export function useConsent() {
-  const [preferences, setPreferences] = useState<ConsentPreferences | null>(null);
-  useEffect(() => {
-    const sync = (event?: Event) => {
-      const detail = (event as CustomEvent<ConsentPreferences> | undefined)?.detail;
-      setPreferences(detail ?? readPreferences());
-    };
-    sync();
-    window.addEventListener(CONSENT_EVENT, sync);
-    return () => window.removeEventListener(CONSENT_EVENT, sync);
-  }, []);
+  const preferences = useSyncExternalStore(subscribePreferences, readPreferences, () => null);
   return {
     preferences,
     allowExternal: () => persist({ necessary: true, external: true }),
@@ -47,37 +48,39 @@ export function useConsent() {
 }
 
 export function openConsentPreferences() {
-  window.dispatchEvent(new Event("jgm-consent-open"));
+  window.dispatchEvent(new Event(OPEN_EVENT));
 }
 
 export function ConsentManager() {
   const params = useParams({ strict: false }) as { lang?: string };
   const lang: Lang = params.lang && isLang(params.lang) ? params.lang : "pt";
   const t = EXTRA_CONTENT[lang].consent;
-  const [open, setOpen] = useState(false);
+  const preferences = useSyncExternalStore(subscribePreferences, readPreferences, () => null);
+  const hydrated = useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  );
+  const [manualOpen, setManualOpen] = useState(false);
   const [customising, setCustomising] = useState(false);
   const [external, setExternal] = useState(false);
-  const [hasStoredChoice, setHasStoredChoice] = useState(false);
 
   useEffect(() => {
-    const current = readPreferences();
-    setOpen(!current);
-    setHasStoredChoice(Boolean(current));
-    setExternal(current?.external ?? false);
     const show = () => {
-      const latest = readPreferences();
-      setExternal(latest?.external ?? false);
-      setHasStoredChoice(Boolean(latest));
+      setExternal(readPreferences()?.external ?? false);
       setCustomising(true);
-      setOpen(true);
+      setManualOpen(true);
     };
-    window.addEventListener("jgm-consent-open", show);
-    return () => window.removeEventListener("jgm-consent-open", show);
+    window.addEventListener(OPEN_EVENT, show);
+    return () => window.removeEventListener(OPEN_EVENT, show);
   }, []);
+
+  const hasStoredChoice = preferences !== null;
+  const open = hydrated && (manualOpen || !hasStoredChoice);
 
   const choose = (value: boolean) => {
     persist({ necessary: true, external: value });
-    setOpen(false);
+    setManualOpen(false);
     setCustomising(false);
   };
 
@@ -94,7 +97,7 @@ export function ConsentManager() {
           <p className="mt-2 text-sm text-muted-foreground">{t.text}</p>
         </div>
         {hasStoredChoice && (
-          <button type="button" onClick={() => setOpen(false)} className="rounded-sm p-2 focus-visible:outline-2 focus-visible:outline-primary" aria-label="Fechar">
+          <button type="button" onClick={() => setManualOpen(false)} className="rounded-sm p-2 focus-visible:outline-2 focus-visible:outline-primary" aria-label="Fechar">
             <X aria-hidden="true" size={18} />
           </button>
         )}
