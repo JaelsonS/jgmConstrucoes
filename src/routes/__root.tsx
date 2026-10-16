@@ -12,6 +12,8 @@ import { useParams } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
+import sora700 from "@fontsource/sora/files/sora-latin-700-normal.woff2?url";
+import sora700Ext from "@fontsource/sora/files/sora-latin-ext-700-normal.woff2?url";
 import { reportLovableError } from "../lib/error";
 import { SITE_CONFIG } from "../config/site";
 
@@ -94,9 +96,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "JGM Construções" },
-      { name: "description", content: "Construção LSF, remodelações e isolamento térmico em Coimbra." },
+      { name: "description", content: "Construção, remodelações, pintura e isolamento térmico a partir de Adémia, Coimbra." },
       { property: "og:title", content: "JGM Construções" },
-      { property: "og:description", content: "Construção LSF, remodelações e isolamento térmico em Coimbra." },
+      { property: "og:description", content: "Construção, remodelações, pintura e isolamento térmico a partir de Adémia, Coimbra." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE },
       { property: "og:image", content: OG_IMAGE },
@@ -107,16 +109,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0A0C10" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "JGM Construções" },
-      { name: "twitter:description", content: "Construção LSF, remodelações e isolamento térmico em Coimbra." },
+      { name: "twitter:description", content: "Construção, remodelações, pintura e isolamento térmico a partir de Adémia, Coimbra." },
       { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
+      { rel: "preload", href: sora700, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
+      { rel: "preload", href: sora700Ext, as: "font", type: "font/woff2", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon-32.png", type: "image/png", sizes: "32x32" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "manifest", href: "/site.webmanifest" },
     ],

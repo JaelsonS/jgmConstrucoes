@@ -7,7 +7,14 @@ import {
 import { EXTRA_CONTENT } from "@/i18n/extended-content";
 import { SITE_CONFIG, copyrightYears } from "@/config/site";
 import { openConsentPreferences } from "./consent";
-import logoMark from "@/assets/brand/jgm-mark.png";
+import mark128 from "@/assets/brand/mark-128.webp";
+import mark192 from "@/assets/brand/mark-192.webp";
+import mark256 from "@/assets/brand/mark-256.webp";
+import markFallback from "@/assets/brand/mark-192.png";
+import { StageImage } from "@/components/photo";
+import type { StagePhoto } from "@/lib/photos";
+
+const MARK_SRCSET = `${mark128} 128w, ${mark192} 192w, ${mark256} 256w`;
 
 export function useLang(): Lang {
   const p = useParams({ strict: false }) as { lang?: string };
@@ -23,12 +30,16 @@ function Logo({ light = false, size = "header" }: { light?: boolean; size?: "hea
   const markClass = size === "footer"
     ? "h-[3.75rem] w-auto shrink-0 drop-shadow-md md:h-[4.5rem]"
     : "h-12 w-auto shrink-0 drop-shadow-sm md:h-[3.35rem]";
+  const markSizes = size === "footer" ? "(min-width: 768px) 72px, 60px" : "(min-width: 768px) 54px, 48px";
   const wordClass = size === "footer"
     ? "text-[1.35rem] tracking-[0.08em] md:text-[1.55rem]"
     : "text-[1.05rem] tracking-[0.06em] sm:text-[1.15rem] md:text-[1.28rem]";
   return (
     <span className="inline-flex items-center gap-1.5 md:gap-2">
-      <img src={logoMark} alt="" width={815} height={830} className={markClass} />
+      <picture>
+        <source type="image/webp" srcSet={MARK_SRCSET} sizes={markSizes} />
+        <img src={markFallback} alt="" width={192} height={196} decoding="async" className={markClass} />
+      </picture>
       <span
         aria-hidden="true"
         className={`logo-wordmark font-display font-semibold leading-none ${wordClass} ${light ? "logo-wordmark--light" : "logo-wordmark--dark"}`}
@@ -199,7 +210,7 @@ export function Header() {
           {links.slice(0, 2).map((x) => (
             <a key={x.to} href={x.to} onClick={() => setOpen(false)} className="border-b border-border py-3 font-display text-lg font-semibold text-foreground">{x.l}</a>
           ))}
-          <p className="pt-3 text-xs font-semibold uppercase tracking-wider text-sky">{t.services}</p>
+          <p className="pt-3 text-xs font-semibold uppercase tracking-wider text-sky-text">{t.services}</p>
           <a href={pageHref(lang, "services")} onClick={() => setOpen(false)} className="border-b border-border py-3 font-display text-lg font-semibold text-foreground">{t.services}</a>
           {SERVICE_IDS.map((service) => <a key={service} href={serviceHref(lang, service)} onClick={() => setOpen(false)} className="border-b border-border py-2 pl-4 text-sm font-medium text-muted-foreground">{DICT[lang].services[service].name}</a>)}
           {links.slice(2).map((x) => <a key={x.to} href={x.to} onClick={() => setOpen(false)} className="border-b border-border py-3 font-display text-lg font-semibold text-foreground">{x.l}</a>)}
@@ -264,12 +275,12 @@ export function Footer() {
   );
 }
 
-export function PageHero({ label, h1, lead, img }: { label: string; h1: string; lead: string; img?: string }) {
+export function PageHero({ label, h1, lead, photo }: { label: string; h1: string; lead: string; photo?: StagePhoto }) {
   const lang = useLang();
   const homeLabel = DICT[lang].nav.home;
   return (
     <section data-header-overlay className="relative overflow-hidden bg-ink pb-20 pt-36 text-ink-foreground md:pb-28 md:pt-44">
-      {img && <><img src={img} alt="" width={1600} height={912} className="absolute inset-0 h-full w-full object-cover opacity-40" /><div className="absolute inset-0 shade-hero" /></>}
+      {photo && <><StageImage photo={photo} alt="" sizes="100vw" priority fetchPriority="low" className="absolute inset-0" imgClassName="h-full w-full object-cover opacity-40" /><div className="absolute inset-0 shade-hero" /></>}
       <div className="container-x relative animate-rise">
         <nav aria-label="Breadcrumb" className="mb-5 text-xs text-ink-muted">
           <a href={`/${lang}`} className="hover:text-sky">{homeLabel}</a>
@@ -291,7 +302,7 @@ export function Faqs({ items }: { items: { q: string; a: string }[] }) {
       {items.map((f, i) => (
         <div key={f.q}>
           <button id={`faq-button-${i}`} className="flex w-full items-center justify-between gap-4 py-5 text-left font-display text-lg font-semibold" aria-expanded={open === i} aria-controls={`faq-panel-${i}`} onClick={() => setOpen(open === i ? null : i)}>
-            {f.q}{open === i ? <Minus aria-hidden="true" className="shrink-0 text-primary" /> : <Plus aria-hidden="true" className="shrink-0 text-primary" />}
+            {f.q}{open === i ? <Minus aria-hidden="true" className="shrink-0 text-primary-text" /> : <Plus aria-hidden="true" className="shrink-0 text-primary-text" />}
           </button>
           {open === i && <p id={`faq-panel-${i}`} role="region" aria-labelledby={`faq-button-${i}`} className="pb-6 pr-10 text-muted-foreground">{f.a}</p>}
         </div>

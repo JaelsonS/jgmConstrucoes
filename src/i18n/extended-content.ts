@@ -46,29 +46,14 @@ type ExtraContent = {
   };
 };
 
-const sharedArticleSections = {
-  pt: [
-    { title: "Antes de comparar propostas", paragraphs: ["Defina o âmbito da intervenção, reúna plantas e fotografias e identifique as prioridades. Uma descrição clara ajuda a comparar propostas com trabalhos equivalentes."] },
-    { title: "Decisões informadas", paragraphs: ["Materiais, condições existentes e acessos influenciam a solução. Uma visita técnica permite confirmar limitações e evitar conclusões baseadas apenas em fotografias."] },
-  ],
-  en: [
-    { title: "Before comparing proposals", paragraphs: ["Define the scope, gather plans and photographs, and identify priorities. A clear brief makes it easier to compare proposals covering equivalent work."] },
-    { title: "Informed decisions", paragraphs: ["Materials, existing conditions and access affect the solution. A technical visit helps confirm constraints instead of relying only on photographs."] },
-  ],
-  es: [
-    { title: "Antes de comparar propuestas", paragraphs: ["Defina el alcance, reúna planos y fotografías e identifique prioridades. Una descripción clara permite comparar propuestas que incluyan trabajos equivalentes."] },
-    { title: "Decisiones informadas", paragraphs: ["Los materiales, el estado existente y los accesos influyen en la solución. Una visita técnica permite confirmar limitaciones sin depender solo de fotografías."] },
-  ],
-} satisfies Record<Lang, Section[]>;
-
 export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
   pt: {
     pages: {
-      blog: { label: "Conhecimento", title: "Guias para preparar a sua obra", lead: "Informação prática sobre construção, remodelação e eficiência da envolvente.", metaTitle: "Blog de construção e remodelação — JGM Construções", metaDesc: "Guias sobre construção LSF, remodelações e isolamento térmico em Coimbra." },
-      careers: { label: "Carreiras", title: "Candidaturas espontâneas", lead: "Informação para quem pretende manifestar interesse em futuras oportunidades na JGM.", metaTitle: "Candidaturas espontâneas — JGM Construções", metaDesc: "Consulte como manifestar interesse em futuras oportunidades profissionais na JGM Construções." },
-      privacy: { label: "Privacidade", title: "Política de Privacidade", lead: "Como a JGM trata os dados pessoais enviados através deste website.", metaTitle: "Política de Privacidade — JGM Construções", metaDesc: "Informação sobre o tratamento de dados pessoais pela JGM Construções." },
-      cookies: { label: "Privacidade", title: "Política de Cookies", lead: "Informação sobre armazenamento local e conteúdos externos.", metaTitle: "Política de Cookies — JGM Construções", metaDesc: "Conheça as categorias de consentimento utilizadas no website da JGM Construções." },
-      terms: { label: "Informação legal", title: "Termos e Condições", lead: "Condições de utilização do website institucional da JGM.", metaTitle: "Termos e Condições — JGM Construções", metaDesc: "Termos de utilização do website da JGM Construções." },
+      blog: { label: "Artigos", title: "Notas práticas antes de pedir orçamento", lead: "Textos curtos sobre o que convém saber antes de descrever uma obra. Não substituem uma visita nem uma proposta.", metaTitle: "Artigos sobre obras e remodelações — JGM Construções", metaDesc: "Notas sobre orçamentos, LSF, capoto, remodelações e pintura, a partir de Coimbra." },
+      careers: { label: "Candidaturas", title: "Candidaturas espontâneas", lead: "Neste momento o site não recebe currículos. A informação abaixo explica essa limitação.", metaTitle: "Candidaturas espontâneas — JGM Construções", metaDesc: "A JGM Construções não recebe currículos pelo website nesta fase." },
+      privacy: { label: "Privacidade", title: "Política de Privacidade", lead: "O que acontece aos dados que envia no formulário deste site.", metaTitle: "Política de Privacidade — JGM Construções", metaDesc: "Quem trata os dados do formulário de orçamento da JGM Construções e para quê." },
+      cookies: { label: "Privacidade", title: "Política de Cookies", lead: "O que o site guarda no navegador e quando o mapa da Google é carregado.", metaTitle: "Política de Cookies — JGM Construções", metaDesc: "Consentimento no site da JGM Construções: preferência guardada no navegador e mapa externo." },
+      terms: { label: "Informação legal", title: "Termos e Condições", lead: "O que este site é, e o que não é: não é um orçamento nem um contrato.", metaTitle: "Termos e Condições — JGM Construções", metaDesc: "Condições de utilização do site da JGM Construções." },
     },
     legal: {
       privacy: [
@@ -90,32 +75,95 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       reviewRequired: "Documento informativo sujeito a validação jurídica e à confirmação do contacto de privacidade e dos prazos de conservação antes do lançamento.",
     },
     careers: {
-      notice: "Neste momento não recolhemos currículos através do website.",
-      noUpload: "O upload permanecerá desativado até existirem armazenamento privado, controlo de acesso, análise de ficheiros e um prazo de eliminação aprovado.",
-      voluntary: "Uma futura candidatura será voluntária e não constituirá promessa de entrevista ou contratação.",
+      notice: "Neste momento o site não recebe currículos.",
+      noUpload: "O envio de ficheiros fica desligado enquanto não houver um sítio privado para os guardar, controlo de quem lhes acede e um prazo de eliminação definido.",
+      voluntary: "Se mais tarde houver uma candidatura, será voluntária. Não é um convite para entrevista nem uma promessa de contratação.",
     },
     blog: {
       read: "Ler artigo",
-      back: "Voltar ao blog",
+      back: "Voltar aos artigos",
       articles: [
-        { slug: "como-preparar-pedido-orcamento", title: "Como preparar um pedido de orçamento para uma obra", description: "A informação essencial para tornar o primeiro contacto mais claro e útil.", category: "Guias para preparar uma obra", sections: sharedArticleSections.pt },
-        { slug: "lsf-o-que-avaliar", title: "Construção LSF: o que avaliar antes de decidir", description: "Pontos a discutir com projetistas e executantes antes de escolher o sistema.", category: "Construção LSF", sections: sharedArticleSections.pt },
-        { slug: "isolamento-exterior-etics", title: "Isolamento pelo exterior: compreender o sistema ETICS", description: "Uma introdução aos componentes e à avaliação prévia da fachada.", category: "Isolamento térmico e capoto", sections: sharedArticleSections.pt },
-        { slug: "planear-uma-remodelacao", title: "Como planear uma remodelação por etapas", description: "Decisões essenciais antes de iniciar trabalhos interiores ou exteriores.", category: "Remodelações", sections: sharedArticleSections.pt },
-        { slug: "preparar-paredes-para-pintura", title: "Preparação de paredes antes da pintura", description: "Porque o diagnóstico e a preparação do suporte influenciam o acabamento.", category: "Pintura e revestimentos", sections: sharedArticleSections.pt },
-        { slug: "melhorar-eficiencia-envolvente", title: "Eficiência energética: começar pela envolvente", description: "Uma visão introdutória sobre isolamento, pontes térmicas e conforto.", category: "Eficiência energética", sections: sharedArticleSections.pt },
-        { slug: "manutencao-preventiva-habitacao", title: "Manutenção preventiva da habitação", description: "Sinais que justificam uma avaliação antes de surgirem danos maiores.", category: "Manutenção da habitação", sections: sharedArticleSections.pt },
+        {
+          slug: "como-preparar-pedido-orcamento",
+          title: "O que escrever no pedido de orçamento",
+          description: "Tipo de trabalho, zona e uma descrição chegam para o primeiro contacto. O resto pede-se se fizer falta.",
+          category: "Orçamento",
+          sections: [
+            { title: "Três dados que mudam a resposta", paragraphs: ["Diga o que quer fazer, em que divisão ou parte do edifício, e em que localidade. “Remodelar a casa” é pouco. “Pintar o apartamento e trocar o pavimento da sala, em Coimbra” já permite perceber o pedido."] },
+            { title: "O que pode ficar para depois", paragraphs: ["Medidas exatas, marcas e cores não são obrigatórias nesta fase. Se tiver fotografias ou um projeto, junte-os quando lhos pedirem. O orçamento, com preço e prazo, só existe depois de o âmbito estar escrito."] },
+          ],
+        },
+        {
+          slug: "lsf-o-que-avaliar",
+          title: "LSF: o que confirmar antes de pedir a estrutura",
+          description: "O Light Steel Frame é um sistema de estrutura. A decisão não se faz só pelo nome.",
+          category: "Construção LSF",
+          sections: [
+            { title: "O que o sistema é", paragraphs: ["A estrutura é feita de perfis de aço leve galvanizado e fecha-se depois com placas, isolamento e acabamentos. Sem projeto de estrutura, não há como dizer se o LSF serve para aquele terreno e para aquele edifício."] },
+            { title: "O que não se decide no site", paragraphs: ["Resistência, prazo e custo dependem do projeto, das licenças e dos acabamentos. Se a obra estiver prevista em LSF, descreva-a no pedido e indique se o projeto de estrutura já existe."] },
+          ],
+        },
+        {
+          slug: "isolamento-exterior-etics",
+          title: "Capoto: o que ver na fachada antes de isolar",
+          description: "O ETICS aplica-se pelo exterior. O estado da parede decide se o sistema pode entrar.",
+          category: "Isolamento térmico",
+          sections: [
+            { title: "As camadas, por ordem", paragraphs: ["Placas de isolamento fixadas à parede, uma camada de reboco com rede e o acabamento que fica à vista. Em Portugal este conjunto é conhecido como capoto."] },
+            { title: "O que a fachada tem de aguentar", paragraphs: ["Humidade, fissuras e remates de janelas, varandas e cobertura mudam a preparação. Não se promete uma poupança na fatura sem estudar o edifício. No pedido, diga se a fachada é nova ou existente."] },
+          ],
+        },
+        {
+          slug: "planear-uma-remodelacao",
+          title: "Como descrever uma remodelação sem a misturar toda",
+          description: "Separe o que fica, o que sai e o que precisa de continuar a ser usado durante a obra.",
+          category: "Remodelações",
+          sections: [
+            { title: "Uma lista vale mais do que um objetivo", paragraphs: ["“Modernizar o apartamento” não diz que trabalhos são. Uma lista curta chega: cozinha, casa de banho, pintura dos quartos, pavimento da sala. Cada linha pode ter um âmbito diferente."] },
+            { title: "Viver no sítio durante a obra", paragraphs: ["Nem sempre é possível. Depende das divisões e da sujidade dos trabalhos. Diga no pedido se precisa de continuar a usar a casa. A resposta diz se isso é realista, não o assume."] },
+          ],
+        },
+        {
+          slug: "preparar-paredes-para-pintura",
+          title: "Pintar não é só a última demão",
+          description: "Manchas, tinta solta e fissuras mudam o trabalho. A preparação só entra se estiver no orçamento.",
+          category: "Pintura",
+          sections: [
+            { title: "O que a parede mostra", paragraphs: ["Tinta a descascar, humidade ou uma superfície irregular depois de outras obras não se resolvem com uma demão por cima. Interior e fachada também não se tratam com o mesmo esquema."] },
+            { title: "Peça a preparação em separado", paragraphs: ["Massa, lixagem e tratamento de manchas são trabalhos. Se não estiverem escritos na proposta, não estão incluídos. No pedido, diga o estado da superfície, mesmo que seja só “a tinta está a soltar-se”."] },
+          ],
+        },
+        {
+          slug: "melhorar-eficiencia-envolvente",
+          title: "Por onde a casa perde calor, antes de trocar equipamentos",
+          description: "Paredes, cobertura e vãos fazem parte da envolvente. Isolar uma delas não descreve o edifício inteiro.",
+          category: "Envolvente",
+          sections: [
+            { title: "Três sítios diferentes", paragraphs: ["A parede exterior, a cobertura e as janelas não são a mesma intervenção. Isolar a fachada com capoto não corrige um telhado que deixa entrar água, nem uma caixilharia que não fecha."] },
+            { title: "O que se pode afirmar", paragraphs: ["Um sistema bem aplicado reduz pontes térmicas na zona onde é colocado. Quanto isso muda a fatura depende do edifício e do uso. Esse número não se inventa numa página."] },
+          ],
+        },
+        {
+          slug: "manutencao-preventiva-habitacao",
+          title: "Sinais numa casa que justificam um pedido, não uma obra imediata",
+          description: "Uma mancha, uma telha partida ou uma fissura são motivos para descrever o problema. Não são um diagnóstico.",
+          category: "Manutenção",
+          sections: [
+            { title: "O que fotografar", paragraphs: ["A mancha no teto, a zona da fachada ou a telha deslocada. Junte a divisão onde aparece e há quanto tempo a nota. A origem da água, por exemplo, pode não estar por baixo da nódoa."] },
+            { title: "O que o pedido não decide", paragraphs: ["Descrever o sinal não marca uma data de obra nem um preço. Serve para a JGM perceber se o caso é de pintura, de cobertura, de estuque ou de outra coisa, e se é preciso ver o local."] },
+          ],
+        },
       ],
     },
-    consent: { title: "Preferências de privacidade", text: "Usamos armazenamento estritamente necessário para guardar a sua escolha. O mapa externo só é carregado com a sua autorização.", accept: "Aceitar tudo", reject: "Rejeitar opcionais", customise: "Personalizar", save: "Guardar preferências", necessary: "Estritamente necessário", necessaryText: "Mantém o website e a sua escolha de privacidade a funcionar.", external: "Conteúdo externo", externalText: "Permite carregar o mapa da Google na página de contactos.", mapBlocked: "O mapa externo está bloqueado pelas suas preferências.", loadMap: "Autorizar e carregar mapa" },
+    consent: { title: "Mapa e privacidade", text: "O site guarda a sua escolha neste navegador. O mapa da Google, na página de contactos, só carrega se o autorizar.", accept: "Permitir o mapa", reject: "Sem mapa", customise: "Ver opções", save: "Guardar escolha", necessary: "Necessário ao site", necessaryText: "Guarda esta escolha para não voltar a perguntar em cada visita.", external: "Mapa da Google", externalText: "Carrega o mapa na página de contactos. A Google pode tratar dados técnicos segundo as regras dela.", mapBlocked: "O mapa está desligado. A morada continua escrita na página.", loadMap: "Permitir e mostrar o mapa" },
   },
   en: {
     pages: {
-      blog: { label: "Knowledge", title: "Guides for planning your project", lead: "Practical information about construction, renovation and building-envelope efficiency.", metaTitle: "Construction and renovation blog — JGM Construções", metaDesc: "Guides about LSF construction, renovation and thermal insulation in Coimbra." },
-      careers: { label: "Careers", title: "Unsolicited applications", lead: "Information for people interested in future opportunities at JGM.", metaTitle: "Unsolicited applications — JGM Construções", metaDesc: "How to express interest in future professional opportunities at JGM Construções." },
-      privacy: { label: "Privacy", title: "Privacy Policy", lead: "How JGM handles personal data submitted through this website.", metaTitle: "Privacy Policy — JGM Construções", metaDesc: "Information about personal data processing by JGM Construções." },
-      cookies: { label: "Privacy", title: "Cookie Policy", lead: "Information about local storage and external content.", metaTitle: "Cookie Policy — JGM Construções", metaDesc: "Learn about consent categories used on the JGM Construções website." },
-      terms: { label: "Legal", title: "Terms and Conditions", lead: "Terms governing use of JGM's corporate website.", metaTitle: "Terms and Conditions — JGM Construções", metaDesc: "Terms governing use of the JGM Construções website." },
+      blog: { label: "Articles", title: "Practical notes before you ask for a quote", lead: "Short notes on what is useful to know before you describe a job. They are not a site visit and they are not a proposal.", metaTitle: "Articles on building work and renovation — JGM Construções", metaDesc: "Notes on quotes, LSF, ETICS, renovations and painting, from Coimbra." },
+      careers: { label: "Applications", title: "Speculative applications", lead: "This site does not take CVs at the moment. The note below explains that limit.", metaTitle: "Speculative applications — JGM Construções", metaDesc: "JGM Construções does not accept CVs through the website at this stage." },
+      privacy: { label: "Privacy", title: "Privacy policy", lead: "What happens to the details you send in the form on this site.", metaTitle: "Privacy policy — JGM Construções", metaDesc: "Who handles the data from the JGM Construções quote form, and why." },
+      cookies: { label: "Privacy", title: "Cookie policy", lead: "What the site stores in the browser, and when the Google map is loaded.", metaTitle: "Cookie policy — JGM Construções", metaDesc: "Consent on the JGM Construções site: a choice stored in the browser, and an external map." },
+      terms: { label: "Legal", title: "Terms and conditions", lead: "What this site is, and what it is not: it is not a quote and it is not a contract.", metaTitle: "Terms and conditions — JGM Construções", metaDesc: "Terms of use for the JGM Construções website." },
     },
     legal: {
       privacy: [
@@ -136,29 +184,92 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       ],
       reviewRequired: "This information requires legal review and confirmation of the privacy contact and retention periods before launch.",
     },
-    careers: { notice: "We do not currently collect CVs through this website.", noUpload: "Upload will remain disabled until private storage, access control, file scanning and an approved deletion period are in place.", voluntary: "A future application will be voluntary and will not promise an interview or employment." },
+    careers: { notice: "This site does not take CVs at the moment.", noUpload: "File upload stays off until there is a private place to store them, control over who can open them, and a set period after which they are deleted.", voluntary: "If an application is possible later, it will be voluntary. It is not an invitation to an interview and it is not a promise of a job." },
     blog: {
       read: "Read article",
-      back: "Back to blog",
+      back: "Back to articles",
       articles: [
-        { slug: "planning-a-quote-request", title: "How to prepare a quote request for building work", description: "The essential information for a clearer, more useful first contact.", category: "Project planning guides", sections: sharedArticleSections.en },
-        { slug: "what-to-consider-lsf", title: "LSF construction: what to consider before deciding", description: "Points to discuss with designers and contractors before choosing the system.", category: "LSF construction", sections: sharedArticleSections.en },
-        { slug: "external-insulation-etics", title: "External insulation: understanding ETICS", description: "An introduction to the components and prior façade assessment.", category: "Thermal insulation", sections: sharedArticleSections.en },
-        { slug: "planning-a-renovation", title: "How to plan a renovation in stages", description: "Essential decisions before starting interior or exterior work.", category: "Renovations", sections: sharedArticleSections.en },
-        { slug: "preparing-walls-for-paint", title: "Preparing walls before painting", description: "Why diagnosing and preparing the substrate affects the finish.", category: "Painting and finishes", sections: sharedArticleSections.en },
-        { slug: "improving-envelope-efficiency", title: "Energy efficiency: start with the envelope", description: "An introduction to insulation, thermal bridges and comfort.", category: "Energy efficiency", sections: sharedArticleSections.en },
-        { slug: "preventive-home-maintenance", title: "Preventive home maintenance", description: "Signs that warrant assessment before greater damage develops.", category: "Home maintenance", sections: sharedArticleSections.en },
+        {
+          slug: "planning-a-quote-request",
+          title: "What to write in a quote request",
+          description: "The type of work, the area and a description are enough for a first message. The rest is asked for if it is needed.",
+          category: "Quotes",
+          sections: [
+            { title: "Three details that change the reply", paragraphs: ["Say what you want done, in which room or part of the building, and in which town. “Renovate the house” is thin. “Paint the flat and replace the living-room floor, in Coimbra” is a request someone can read."] },
+            { title: "What can wait", paragraphs: ["Exact sizes, brands and colours are not required at this stage. If you have photos or drawings, send them when they are asked for. A quote with a price and a timing exists only after the scope is written down."] },
+          ],
+        },
+        {
+          slug: "what-to-consider-lsf",
+          title: "LSF: what to check before you ask for the frame",
+          description: "Light Steel Frame is a structural system. The decision is not made by the name alone.",
+          category: "LSF",
+          sections: [
+            { title: "What the system is", paragraphs: ["The frame is made of galvanised light-steel profiles and is later closed with boards, insulation and finishes. Without a structural design, there is no way to say whether LSF suits that plot and that building."] },
+            { title: "What a website cannot decide", paragraphs: ["Strength, timing and cost depend on the design, the permits and the finishes. If the job is planned in LSF, describe it in the request and say whether a structural design already exists."] },
+          ],
+        },
+        {
+          slug: "external-insulation-etics",
+          title: "ETICS: what to look at on the façade before insulating",
+          description: "The system is fixed to the outside. The condition of the wall decides whether it can go on.",
+          category: "External insulation",
+          sections: [
+            { title: "The layers, in order", paragraphs: ["Insulation boards fixed to the wall, a base coat with mesh, and the finish you see. In Portugal this build-up is commonly called capoto."] },
+            { title: "What the façade has to take", paragraphs: ["Damp, cracks and the junctions at windows, balconies and the roof change the preparation. A saving on the energy bill is not promised without looking at the building. In the request, say whether the façade is new or already there."] },
+          ],
+        },
+        {
+          slug: "planning-a-renovation",
+          title: "How to describe a renovation without mixing it all together",
+          description: "Separate what stays, what comes out, and what you still need to use during the work.",
+          category: "Renovations",
+          sections: [
+            { title: "A list is clearer than a goal", paragraphs: ["“Update the flat” does not say which jobs those are. A short list is enough: kitchen, bathroom, painting the bedrooms, living-room floor. Each line can have a different scope."] },
+            { title: "Staying in the place during the work", paragraphs: ["It is not always possible. It depends on the rooms and on how messy the tasks are. Say in the request if you need to keep using the house. The reply says whether that is realistic. It does not assume it."] },
+          ],
+        },
+        {
+          slug: "preparing-walls-for-paint",
+          title: "Painting is not only the last coat",
+          description: "Stains, loose paint and cracks change the job. Preparation is included only if it is in the quote.",
+          category: "Painting",
+          sections: [
+            { title: "What the wall is showing", paragraphs: ["Paint coming off, damp, or a surface left uneven by other work is not solved by one coat on top. An interior and a façade are not treated with the same system either."] },
+            { title: "Ask for preparation as its own item", paragraphs: ["Filling, sanding and stain treatment are work. If they are not written in the proposal, they are not included. In the request, describe the surface, even if that is only “the paint is coming off”."] },
+          ],
+        },
+        {
+          slug: "improving-envelope-efficiency",
+          title: "Where a house loses heat, before you change the equipment",
+          description: "Walls, the roof and the openings are different parts of the envelope. Insulating one of them does not describe the whole building.",
+          category: "The envelope",
+          sections: [
+            { title: "Three different places", paragraphs: ["The external wall, the roof and the windows are not the same job. Insulating the façade with ETICS does not fix a roof that lets water in, or a window that does not close."] },
+            { title: "What can actually be said", paragraphs: ["A system that is properly applied reduces thermal bridges where it is placed. How much that changes the bill depends on the building and how it is used. That figure is not something to invent on a page."] },
+          ],
+        },
+        {
+          slug: "preventive-home-maintenance",
+          title: "Signs in a house that justify a request, not an immediate job",
+          description: "A stain, a broken tile or a crack are reasons to describe the problem. They are not a diagnosis.",
+          category: "Maintenance",
+          sections: [
+            { title: "What to photograph", paragraphs: ["The stain on the ceiling, the patch of façade or the slipped tile. Add the room where it shows and how long you have noticed it. The source of the water, for example, may not be under the mark."] },
+            { title: "What the request does not decide", paragraphs: ["Describing the sign does not book a date or a price. It lets JGM see whether the case is painting, roofing, plaster or something else, and whether the place needs to be seen."] },
+          ],
+        },
       ],
     },
-    consent: { title: "Privacy preferences", text: "We use strictly necessary storage to remember your choice. The external map loads only with your permission.", accept: "Accept all", reject: "Reject optional", customise: "Customise", save: "Save preferences", necessary: "Strictly necessary", necessaryText: "Keeps the website and your privacy choice working.", external: "External content", externalText: "Allows Google Maps to load on the contact page.", mapBlocked: "The external map is blocked by your preferences.", loadMap: "Allow and load map" },
+    consent: { title: "Map and privacy", text: "The site stores your choice in this browser. The Google map on the contact page loads only if you allow it.", accept: "Allow the map", reject: "No map", customise: "See options", save: "Save choice", necessary: "Needed for the site", necessaryText: "Stores this choice so the question is not asked on every visit.", external: "Google map", externalText: "Loads the map on the contact page. Google may process technical data under its own rules.", mapBlocked: "The map is off. The address is still written on the page.", loadMap: "Allow and show the map" },
   },
   es: {
     pages: {
-      blog: { label: "Conocimiento", title: "Guías para preparar su obra", lead: "Información práctica sobre construcción, reformas y eficiencia de la envolvente.", metaTitle: "Blog de construcción y reformas — JGM Construções", metaDesc: "Guías sobre construcción LSF, reformas y aislamiento térmico en Coímbra." },
-      careers: { label: "Empleo", title: "Candidaturas espontáneas", lead: "Información para quienes desean manifestar interés en futuras oportunidades en JGM.", metaTitle: "Candidaturas espontáneas — JGM Construções", metaDesc: "Cómo manifestar interés en futuras oportunidades profesionales en JGM Construções." },
-      privacy: { label: "Privacidad", title: "Política de Privacidad", lead: "Cómo trata JGM los datos personales enviados a través de este sitio.", metaTitle: "Política de Privacidad — JGM Construções", metaDesc: "Información sobre el tratamiento de datos personales por JGM Construções." },
-      cookies: { label: "Privacidad", title: "Política de Cookies", lead: "Información sobre almacenamiento local y contenido externo.", metaTitle: "Política de Cookies — JGM Construções", metaDesc: "Conozca las categorías de consentimiento utilizadas en el sitio de JGM Construções." },
-      terms: { label: "Información legal", title: "Términos y Condiciones", lead: "Condiciones de uso del sitio corporativo de JGM.", metaTitle: "Términos y Condiciones — JGM Construções", metaDesc: "Términos de uso del sitio de JGM Construções." },
+      blog: { label: "Artículos", title: "Notas prácticas antes de pedir presupuesto", lead: "Textos cortos sobre lo que conviene saber antes de describir una obra. No sustituyen una visita ni una propuesta.", metaTitle: "Artículos sobre obras y reformas — JGM Construções", metaDesc: "Notas sobre presupuestos, LSF, SATE, reformas y pintura, desde Coímbra." },
+      careers: { label: "Candidaturas", title: "Candidaturas espontáneas", lead: "En este momento el sitio no recibe currículos. La nota de abajo explica ese límite.", metaTitle: "Candidaturas espontáneas — JGM Construções", metaDesc: "JGM Construções no recibe currículos por el sitio web en esta fase." },
+      privacy: { label: "Privacidad", title: "Política de privacidad", lead: "Qué ocurre con los datos que envía en el formulario de este sitio.", metaTitle: "Política de privacidad — JGM Construções", metaDesc: "Quién trata los datos del formulario de presupuesto de JGM Construções y para qué." },
+      cookies: { label: "Privacidad", title: "Política de cookies", lead: "Qué guarda el sitio en el navegador y cuándo se carga el mapa de Google.", metaTitle: "Política de cookies — JGM Construções", metaDesc: "Consentimiento en el sitio de JGM Construções: una elección guardada en el navegador y un mapa externo." },
+      terms: { label: "Información legal", title: "Términos y condiciones", lead: "Qué es este sitio y qué no es: no es un presupuesto ni un contrato.", metaTitle: "Términos y condiciones — JGM Construções", metaDesc: "Condiciones de uso del sitio de JGM Construções." },
     },
     legal: {
       privacy: [
@@ -179,21 +290,84 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       ],
       reviewRequired: "Este documento requiere revisión jurídica y confirmación del contacto de privacidad y de los plazos de conservación antes del lanzamiento.",
     },
-    careers: { notice: "Actualmente no recogemos currículos a través de este sitio.", noUpload: "La subida permanecerá desactivada hasta disponer de almacenamiento privado, control de acceso, análisis de archivos y un plazo de eliminación aprobado.", voluntary: "Una futura candidatura será voluntaria y no supondrá promesa de entrevista o contratación." },
+    careers: { notice: "En este momento el sitio no recibe currículos.", noUpload: "El envío de archivos sigue desactivado mientras no haya un lugar privado donde guardarlos, control de quién puede abrirlos y un plazo de eliminación definido.", voluntary: "Si más adelante hubiera una candidatura, será voluntaria. No es una invitación a una entrevista ni una promesa de contratación." },
     blog: {
       read: "Leer artículo",
-      back: "Volver al blog",
+      back: "Volver a los artículos",
       articles: [
-        { slug: "preparar-solicitud-presupuesto", title: "Cómo preparar una solicitud de presupuesto para una obra", description: "La información esencial para un primer contacto más claro y útil.", category: "Guías para preparar una obra", sections: sharedArticleSections.es },
-        { slug: "que-evaluar-lsf", title: "Construcción LSF: qué evaluar antes de decidir", description: "Puntos que conviene tratar con proyectistas y constructores.", category: "Construcción LSF", sections: sharedArticleSections.es },
-        { slug: "aislamiento-exterior-sate", title: "Aislamiento exterior: entender el sistema SATE", description: "Introducción a sus componentes y a la evaluación previa de la fachada.", category: "Aislamiento térmico", sections: sharedArticleSections.es },
-        { slug: "planificar-una-reforma", title: "Cómo planificar una reforma por etapas", description: "Decisiones esenciales antes de comenzar trabajos interiores o exteriores.", category: "Reformas", sections: sharedArticleSections.es },
-        { slug: "preparar-paredes-para-pintar", title: "Preparación de paredes antes de pintar", description: "Por qué el diagnóstico y la preparación influyen en el acabado.", category: "Pintura y revestimientos", sections: sharedArticleSections.es },
-        { slug: "mejorar-eficiencia-envolvente", title: "Eficiencia energética: empezar por la envolvente", description: "Introducción al aislamiento, los puentes térmicos y el confort.", category: "Eficiencia energética", sections: sharedArticleSections.es },
-        { slug: "mantenimiento-preventivo-vivienda", title: "Mantenimiento preventivo de la vivienda", description: "Señales que aconsejan una evaluación antes de daños mayores.", category: "Mantenimiento de la vivienda", sections: sharedArticleSections.es },
+        {
+          slug: "preparar-solicitud-presupuesto",
+          title: "Qué escribir en la solicitud de presupuesto",
+          description: "El tipo de trabajo, la zona y una descripción bastan para el primer contacto. El resto se pide si hace falta.",
+          category: "Presupuesto",
+          sections: [
+            { title: "Tres datos que cambian la respuesta", paragraphs: ["Diga qué quiere hacer, en qué estancia o parte del edificio, y en qué localidad. “Reformar la casa” es poco. “Pintar el piso y cambiar el suelo del salón, en Coímbra” ya permite entender la solicitud."] },
+            { title: "Lo que puede quedar para después", paragraphs: ["Las medidas exactas, las marcas y los colores no son obligatorios en esta fase. Si tiene fotografías o un proyecto, júntelos cuando se los pidan. El presupuesto, con precio y plazo, solo existe cuando el alcance está escrito."] },
+          ],
+        },
+        {
+          slug: "que-evaluar-lsf",
+          title: "LSF: qué confirmar antes de pedir la estructura",
+          description: "El Light Steel Frame es un sistema de estructura. La decisión no se toma solo por el nombre.",
+          category: "Construcción LSF",
+          sections: [
+            { title: "Qué es el sistema", paragraphs: ["La estructura se hace con perfiles de acero ligero galvanizado y se cierra después con placas, aislamiento y acabados. Sin proyecto de estructura, no hay forma de decir si el LSF sirve para ese terreno y para ese edificio."] },
+            { title: "Lo que no se decide en el sitio", paragraphs: ["La resistencia, el plazo y el coste dependen del proyecto, de las licencias y de los acabados. Si la obra está prevista en LSF, descríbala en la solicitud e indique si el proyecto de estructura ya existe."] },
+          ],
+        },
+        {
+          slug: "aislamiento-exterior-sate",
+          title: "SATE: qué ver en la fachada antes de aislar",
+          description: "El sistema se aplica por el exterior. El estado del muro decide si puede colocarse.",
+          category: "Aislamiento térmico",
+          sections: [
+            { title: "Las capas, por orden", paragraphs: ["Placas de aislamiento fijadas al muro, una capa de mortero con malla y el acabado que queda a la vista. En Portugal este conjunto se conoce como capoto."] },
+            { title: "Lo que la fachada tiene que aguantar", paragraphs: ["La humedad, las fisuras y los encuentros de ventanas, balcones y cubierta cambian la preparación. No se promete un ahorro en la factura sin estudiar el edificio. En la solicitud, diga si la fachada es nueva o existente."] },
+          ],
+        },
+        {
+          slug: "planificar-una-reforma",
+          title: "Cómo describir una reforma sin mezclarlo todo",
+          description: "Separe lo que se queda, lo que sale y lo que tiene que seguir usándose durante la obra.",
+          category: "Reformas",
+          sections: [
+            { title: "Una lista vale más que un objetivo", paragraphs: ["“Modernizar el piso” no dice qué trabajos son. Una lista corta basta: cocina, baño, pintura de los dormitorios, suelo del salón. Cada línea puede tener un alcance distinto."] },
+            { title: "Vivir en el sitio durante la obra", paragraphs: ["No siempre es posible. Depende de las estancias y de la suciedad de los trabajos. Diga en la solicitud si necesita seguir usando la casa. La respuesta indica si eso es realista; no lo da por hecho."] },
+          ],
+        },
+        {
+          slug: "preparar-paredes-para-pintar",
+          title: "Pintar no es solo la última mano",
+          description: "Las manchas, la pintura suelta y las fisuras cambian el trabajo. La preparación solo entra si está en el presupuesto.",
+          category: "Pintura",
+          sections: [
+            { title: "Lo que muestra la pared", paragraphs: ["Pintura que se desconcha, humedad o una superficie irregular después de otras obras no se resuelven con una mano encima. Interior y fachada tampoco se tratan con el mismo sistema."] },
+            { title: "Pida la preparación aparte", paragraphs: ["La masilla, el lijado y el tratamiento de manchas son trabajos. Si no están escritos en la propuesta, no están incluidos. En la solicitud, diga el estado de la superficie, aunque sea solo “la pintura se está soltando”."] },
+          ],
+        },
+        {
+          slug: "mejorar-eficiencia-envolvente",
+          title: "Por dónde pierde calor la casa, antes de cambiar equipos",
+          description: "Los muros, la cubierta y los huecos forman parte de la envolvente. Aislar uno de ellos no describe el edificio entero.",
+          category: "Envolvente",
+          sections: [
+            { title: "Tres sitios distintos", paragraphs: ["El muro exterior, la cubierta y las ventanas no son la misma intervención. Aislar la fachada con SATE no corrige un tejado por el que entra agua, ni una carpintería que no cierra."] },
+            { title: "Lo que sí se puede afirmar", paragraphs: ["Un sistema bien aplicado reduce los puentes térmicos en la zona donde se coloca. Cuánto cambia eso la factura depende del edificio y del uso. Esa cifra no se inventa en una página."] },
+          ],
+        },
+        {
+          slug: "mantenimiento-preventivo-vivienda",
+          title: "Señales en una casa que justifican una solicitud, no una obra inmediata",
+          description: "Una mancha, una teja rota o una fisura son motivos para describir el problema. No son un diagnóstico.",
+          category: "Mantenimiento",
+          sections: [
+            { title: "Qué fotografiar", paragraphs: ["La mancha del techo, la zona de la fachada o la teja desplazada. Añada la estancia donde aparece y desde cuándo la nota. El origen del agua, por ejemplo, puede no estar debajo de la mancha."] },
+            { title: "Lo que la solicitud no decide", paragraphs: ["Describir la señal no marca una fecha de obra ni un precio. Sirve para que JGM entienda si el caso es de pintura, de cubierta, de enlucido o de otra cosa, y si hace falta ver el lugar."] },
+          ],
+        },
       ],
     },
-    consent: { title: "Preferencias de privacidad", text: "Usamos almacenamiento estrictamente necesario para recordar su elección. El mapa externo solo se carga con autorización.", accept: "Aceptar todo", reject: "Rechazar opcionales", customise: "Personalizar", save: "Guardar preferencias", necessary: "Estrictamente necesario", necessaryText: "Mantiene el sitio y su elección de privacidad en funcionamiento.", external: "Contenido externo", externalText: "Permite cargar Google Maps en la página de contacto.", mapBlocked: "El mapa externo está bloqueado por sus preferencias.", loadMap: "Autorizar y cargar mapa" },
+    consent: { title: "Mapa y privacidad", text: "El sitio guarda su elección en este navegador. El mapa de Google, en la página de contacto, solo se carga si lo autoriza.", accept: "Permitir el mapa", reject: "Sin mapa", customise: "Ver opciones", save: "Guardar elección", necessary: "Necesario para el sitio", necessaryText: "Guarda esta elección para no volver a preguntar en cada visita.", external: "Mapa de Google", externalText: "Carga el mapa en la página de contacto. Google puede tratar datos técnicos según sus propias reglas.", mapBlocked: "El mapa está desactivado. La dirección sigue escrita en la página.", loadMap: "Permitir y mostrar el mapa" },
   },
 };
 

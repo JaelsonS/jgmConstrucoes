@@ -4,23 +4,18 @@
 @import "@fontsource/manrope/latin-ext-500.css";
 @import "@fontsource/manrope/latin-600.css";
 @import "@fontsource/manrope/latin-ext-600.css";
-@import "@fontsource/manrope/latin-700.css";
-@import "@fontsource/manrope/latin-ext-700.css";
-@import "@fontsource/sora/latin-500.css";
-@import "@fontsource/sora/latin-ext-500.css";
 @import "@fontsource/sora/latin-600.css";
 @import "@fontsource/sora/latin-ext-600.css";
 @import "@fontsource/sora/latin-700.css";
 @import "@fontsource/sora/latin-ext-700.css";
 @import "tailwindcss" source(none);
 @source "../src";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", "Sora Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", "Manrope Fallback", ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 2px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
@@ -48,7 +43,10 @@
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-muted: var(--ink-muted);
   --color-sky: var(--sky);
+  --color-sky-text: var(--sky-text);
   --color-steel: var(--steel);
+  --color-steel-text: var(--steel-text);
+  --color-primary-text: var(--primary-text);
 }
 
 :root {
@@ -77,7 +75,10 @@
   --ink-foreground: #f5f7fa;
   --ink-muted: #c8c8d0;
   --sky: #00b4f0;
+  --sky-text: #006fbf;
   --steel: #9c9ca8;
+  --steel-text: #5c5c68;
+  --primary-text: #a34e00;
   --brand-blue: #0078e4;
   --brand-blue-deep: #003ccc;
   --brand-orange-bright: #fca80c;
@@ -95,7 +96,8 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; }
+  strong, b { font-weight: 600; }
   :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -134,7 +136,48 @@
   &:hover { background: var(--foreground); color: var(--background); }
 }
 
-@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@font-face {
+  font-family: "Manrope Fallback";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Arial");
+  ascent-override: 102.74%;
+  descent-override: 28.91%;
+  line-gap-override: 0%;
+  size-adjust: 103.76%;
+}
+@font-face {
+  font-family: "Manrope Fallback";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Arial Bold");
+  ascent-override: 107.38%;
+  descent-override: 30.22%;
+  line-gap-override: 0%;
+  size-adjust: 99.27%;
+}
+@font-face {
+  font-family: "Sora Fallback";
+  font-style: normal;
+  font-weight: 600;
+  src: local("Arial Bold");
+  ascent-override: 90.49%;
+  descent-override: 27.06%;
+  line-gap-override: 0%;
+  size-adjust: 107.19%;
+}
+@font-face {
+  font-family: "Sora Fallback";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Arial Bold");
+  ascent-override: 89.72%;
+  descent-override: 26.82%;
+  line-gap-override: 0%;
+  size-adjust: 108.11%;
+}
+
+@keyframes rise { from { transform: translateY(16px); } to { transform: none; } }
 @keyframes slowzoom { from { transform: scale(1.08); } to { transform: scale(1); } }
 @utility animate-rise { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
 @utility animate-slowzoom { animation: slowzoom 2.4s cubic-bezier(.2,.7,.2,1) both; }

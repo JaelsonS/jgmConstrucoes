@@ -57,14 +57,6 @@ function persist(preferences: ConsentPreferences) {
   window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: preferences }));
 }
 
-function useIsClient() {
-  return useSyncExternalStore(
-    () => () => undefined,
-    () => true,
-    () => false,
-  );
-}
-
 export function useConsent() {
   const preferences = useSyncExternalStore(
     subscribePreferences,
@@ -90,7 +82,6 @@ export function ConsentManager() {
     getPreferencesSnapshot,
     () => null,
   );
-  const isClient = useIsClient();
   const [manualOpen, setManualOpen] = useState(false);
   const [customising, setCustomising] = useState(false);
   const [external, setExternal] = useState(false);
@@ -106,7 +97,7 @@ export function ConsentManager() {
   }, []);
 
   const hasStoredChoice = preferences !== null;
-  const open = isClient && (manualOpen || !hasStoredChoice);
+  const open = manualOpen || !hasStoredChoice;
 
   const choose = (value: boolean) => {
     persist({ necessary: true, external: value });
@@ -136,7 +127,7 @@ export function ConsentManager() {
         <div className="mt-5 space-y-3 border-y border-border py-4">
           <div className="flex items-start justify-between gap-4">
             <div><strong className="text-sm">{t.necessary}</strong><p className="text-xs text-muted-foreground">{t.necessaryText}</p></div>
-            <span className="text-xs font-semibold text-primary">ON</span>
+            <span className="text-xs font-semibold text-primary-text">ON</span>
           </div>
           <label className="flex cursor-pointer items-start justify-between gap-4">
             <span><strong className="text-sm">{t.external}</strong><span className="block text-xs text-muted-foreground">{t.externalText}</span></span>

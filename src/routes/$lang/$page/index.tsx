@@ -3,19 +3,17 @@ import { useState, type FormEvent } from "react";
 import { ArrowRight, MapPin, Building2, FileLock2, LoaderCircle } from "lucide-react";
 import { COMPANY, DICT, SERVICE_IDS, isLang, pageKeyFromSlug, pagePaths, seoHead, type Lang, type PageKey, type ServiceId } from "@/i18n/content";
 import { CtaBand, Faqs, PageHero, Reveal, pageHref, serviceHref } from "@/components/site";
+import { StageImage } from "@/components/photo";
 import { EXTRA_CONTENT } from "@/i18n/extended-content";
 import { useConsent } from "@/components/consent";
 import { CONTACT_SERVICES } from "@/lib/contact-schema";
 import { sendContactRequest } from "@/lib/contact.server";
 import { sendCareerInterest } from "@/lib/career.server";
-import s1 from "@/assets/stage-1.jpg";
-import s2 from "@/assets/stage-2.jpg";
-import s3 from "@/assets/stage-3.jpg";
-import s4 from "@/assets/stage-4.jpg";
+import { STAGES, type StagePhoto } from "@/lib/photos";
 
-const SERVICE_PAGE_IMG: Record<ServiceId, string> = {
-  buildings: s4, lsf: s2, renovations: s4, painting: s3, coverings: s1,
-  plastering: s2, glazing: s3, roofing: s1, etics: s3,
+const SERVICE_PAGE_IMG: Record<ServiceId, StagePhoto> = {
+  buildings: STAGES[3], lsf: STAGES[1], renovations: STAGES[3], painting: STAGES[2], coverings: STAGES[0],
+  plastering: STAGES[1], glazing: STAGES[2], roofing: STAGES[0], etics: STAGES[2],
 };
 
 export const Route = createFileRoute("/$lang/$page/")({
@@ -43,10 +41,10 @@ function Page() {
 
   if (k === "about")
     return (<>
-      <PageHero label={t.about.label} h1={t.about.h1} lead={t.about.lead} img={s2} />
+      <PageHero label={t.about.label} h1={t.about.h1} lead={t.about.lead} photo={STAGES[1]} />
       <section className="container-x grid gap-8 py-24 md:grid-cols-3">
         {t.about.blocks.map((b, i) => (
-          <Reveal key={b.t}><span className="font-display text-4xl font-bold text-sky">0{i + 1}</span><h2 className="mt-3 text-2xl font-semibold">{b.t}</h2><p className="mt-3 text-muted-foreground">{b.d}</p></Reveal>
+          <Reveal key={b.t}><span className="font-display text-4xl font-bold text-sky-text">0{i + 1}</span><h2 className="mt-3 text-2xl font-semibold">{b.t}</h2><p className="mt-3 text-muted-foreground">{b.d}</p></Reveal>
         ))}
       </section>
       <CtaBand />
@@ -54,11 +52,11 @@ function Page() {
 
   if (k === "services")
     return (<>
-      <PageHero label={t.servicesPage.label} h1={t.servicesPage.h1} lead={t.servicesPage.lead} img={s3} />
+      <PageHero label={t.servicesPage.label} h1={t.servicesPage.h1} lead={t.servicesPage.lead} photo={STAGES[2]} />
       <section className="container-x space-y-20 py-24">
         {SERVICE_IDS.map((s, i) => (
           <Reveal key={s} className={`grid items-center gap-10 md:grid-cols-2 ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}>
-            <img src={SERVICE_PAGE_IMG[s]} alt={t.illustrative} width={1600} height={912} loading="lazy" className="aspect-[4/3] w-full rounded-sm object-cover" />
+            <StageImage photo={SERVICE_PAGE_IMG[s]} alt={t.illustrative} sizes="(min-width: 768px) 46vw, 92vw" imgClassName="aspect-[4/3] w-full rounded-sm object-cover" />
             <div>
               <h2 className="text-3xl font-bold">{t.services[s].name}</h2>
               <p className="mt-4 text-muted-foreground">{t.services[s].intro}</p>
@@ -72,7 +70,7 @@ function Page() {
 
   if (k === "faq")
     return (<>
-      <PageHero label={t.faqPage.label} h1={t.faqPage.h1} lead={t.faqPage.lead} img={s1} />
+      <PageHero label={t.faqPage.label} h1={t.faqPage.h1} lead={t.faqPage.lead} photo={STAGES[0]} />
       <section className="container-x max-w-4xl py-24"><Faqs items={[...t.faqs, ...SERVICE_IDS.flatMap((s) => t.services[s].faqs)]} /></section>
       <CtaBand />
     </>);
@@ -80,14 +78,14 @@ function Page() {
   if (k === "blog") {
     const extra = EXTRA_CONTENT[lang];
     return (<>
-      <PageHero label={extra.pages.blog.label} h1={extra.pages.blog.title} lead={extra.pages.blog.lead} img={s1} />
+      <PageHero label={extra.pages.blog.label} h1={extra.pages.blog.title} lead={extra.pages.blog.lead} photo={STAGES[0]} />
       <section className="container-x grid gap-6 py-24 md:grid-cols-3">
         {extra.blog.articles.map((article) => (
           <article key={article.slug} className="flex flex-col rounded-sm border border-border bg-card p-6">
-            <p className="eyebrow text-primary">{article.category}</p>
+            <p className="eyebrow text-primary-text">{article.category}</p>
             <h2 className="mt-4 text-2xl font-semibold">{article.title}</h2>
             <p className="mt-3 flex-1 text-sm text-muted-foreground">{article.description}</p>
-            <a href={`${pageHref(lang, "blog")}/${article.slug}`} className="mt-6 inline-flex items-center gap-2 font-semibold text-primary">{extra.blog.read}<ArrowRight aria-hidden="true" size={16} /></a>
+            <a href={`${pageHref(lang, "blog")}/${article.slug}`} className="mt-6 inline-flex items-center gap-2 font-semibold text-primary-text">{extra.blog.read}<ArrowRight aria-hidden="true" size={16} /></a>
           </article>
         ))}
       </section>
@@ -97,10 +95,10 @@ function Page() {
   if (k === "careers") {
     const extra = EXTRA_CONTENT[lang];
     return (<>
-      <PageHero label={extra.pages.careers.label} h1={extra.pages.careers.title} lead={extra.pages.careers.lead} img={s3} />
+      <PageHero label={extra.pages.careers.label} h1={extra.pages.careers.title} lead={extra.pages.careers.lead} photo={STAGES[2]} />
       <section className="container-x py-24">
         <div className="mx-auto max-w-3xl rounded-sm border border-border bg-card p-8 md:p-12">
-          <FileLock2 aria-hidden="true" className="text-primary" size={36} />
+          <FileLock2 aria-hidden="true" className="text-primary-text" size={36} />
           <h2 className="mt-5 text-2xl font-semibold">{extra.careers.notice}</h2>
           <p className="mt-4 text-muted-foreground">{extra.careers.noUpload}</p>
           <p className="mt-4 text-muted-foreground">{extra.careers.voluntary}</p>
@@ -130,9 +128,9 @@ function CareerForm({ lang }: { lang: Lang }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [submissionId, setSubmissionId] = useState(() => crypto.randomUUID());
   const copy = {
-    pt: { name: "Nome", email: "Email", phone: "Telefone (opcional)", area: "Área ou função pretendida", message: "Mensagem (opcional)", consent: "Li a Política de Privacidade e pretendo enviar voluntariamente esta manifestação de interesse.", submit: "Enviar manifestação de interesse", success: "A manifestação foi aceite para envio.", error: "Não foi possível enviar. Tente novamente mais tarde." },
-    en: { name: "Name", email: "Email", phone: "Phone (optional)", area: "Area or role of interest", message: "Message (optional)", consent: "I have read the Privacy Policy and voluntarily wish to send this expression of interest.", submit: "Send expression of interest", success: "Your expression of interest was accepted for sending.", error: "We could not send it. Please try again later." },
-    es: { name: "Nombre", email: "Email", phone: "Teléfono (opcional)", area: "Área o función deseada", message: "Mensaje (opcional)", consent: "He leído la Política de Privacidad y deseo enviar voluntariamente esta manifestación de interés.", submit: "Enviar manifestación de interés", success: "La manifestación fue aceptada para su envío.", error: "No se pudo enviar. Inténtelo de nuevo más tarde." },
+    pt: { name: "Nome", email: "Email", phone: "Telefone (opcional)", area: "Área ou função", message: "Mensagem (opcional)", consent: "Li a Política de Privacidade e envio esta mensagem por minha iniciativa. Não é um pedido de entrevista.", submit: "Enviar mensagem", success: "Recebemos a mensagem. Não é um convite para entrevista nem uma proposta de trabalho.", error: "A mensagem não foi enviada. Verifique os dados e tente outra vez." },
+    en: { name: "Name", email: "Email", phone: "Phone (optional)", area: "Area or role", message: "Message (optional)", consent: "I have read the Privacy Policy and I am sending this message on my own initiative. It is not a request for an interview.", submit: "Send message", success: "We received the message. It is not an invitation to an interview and it is not a job offer.", error: "The message was not sent. Check the details and try again." },
+    es: { name: "Nombre", email: "Correo electrónico", phone: "Teléfono (opcional)", area: "Área o función", message: "Mensaje (opcional)", consent: "He leído la política de privacidad y envío este mensaje por mi cuenta. No es una solicitud de entrevista.", submit: "Enviar mensaje", success: "Hemos recibido el mensaje. No es una invitación a una entrevista ni una oferta de trabajo.", error: "El mensaje no se ha enviado. Revise los datos e inténtelo de nuevo." },
   }[lang];
   const field = "mt-2 w-full rounded-sm border border-input bg-background px-4 py-3 outline-none focus:border-primary";
   const submit = async (event: FormEvent<HTMLFormElement>) => {
@@ -187,9 +185,9 @@ function Contact({ lang }: { lang: Lang }) {
   const [submissionId, setSubmissionId] = useState(() => crypto.randomUUID());
   const { preferences, allowExternal } = useConsent();
   const messages = {
-    pt: { sending: "A enviar…", success: "Pedido aceite para envio. Entraremos em contacto através dos dados indicados.", error: "Não foi possível enviar o pedido. Verifique os dados e tente novamente mais tarde." },
-    en: { sending: "Sending…", success: "Your request was accepted for sending. We will use the details provided to contact you.", error: "We could not send your request. Check the details and try again later." },
-    es: { sending: "Enviando…", success: "La solicitud fue aceptada para su envío. Contactaremos con los datos indicados.", error: "No se pudo enviar la solicitud. Revise los datos e inténtelo de nuevo más tarde." },
+    pt: { sending: "A enviar…", success: "Recebemos o pedido. A resposta usa os dados que indicou.", error: "O pedido não foi enviado. Verifique os dados e tente outra vez." },
+    en: { sending: "Sending…", success: "We received the request. Any reply will use the details you gave.", error: "The request was not sent. Check the details and try again." },
+    es: { sending: "Enviando…", success: "Hemos recibido la solicitud. La respuesta usa los datos que indicó.", error: "La solicitud no se ha enviado. Revise los datos e inténtelo de nuevo." },
   }[lang];
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -230,7 +228,7 @@ function Contact({ lang }: { lang: Lang }) {
   const fieldError = (n: string) =>
     errors[n] ? <p id={`${n}-err`} className="mt-1 text-sm text-destructive">{errors[n]}</p> : null;
   return (<>
-    <PageHero label={t.contact.label} h1={t.contact.h1} lead={t.contact.lead} img={s4} />
+    <PageHero label={t.contact.label} h1={t.contact.h1} lead={t.contact.lead} photo={STAGES[3]} />
     <section className="container-x grid gap-14 py-24 md:grid-cols-3">
       <form onSubmit={submit} noValidate className="grid gap-6 md:col-span-2 md:grid-cols-2">
         <div className="absolute -left-[9999px]" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
@@ -254,8 +252,8 @@ function Contact({ lang }: { lang: Lang }) {
         </div>
       </form>
       <aside className="space-y-8">
-        <div><h2 className="flex items-center gap-2 font-display font-semibold"><MapPin aria-hidden="true" size={18} className="text-primary" />{t.contact.address}</h2><address className="mt-3 not-italic text-muted-foreground">{COMPANY.address.map((a) => <span key={a}>{a}<br /></span>)}</address></div>
-        <div><h2 className="flex items-center gap-2 font-display font-semibold"><Building2 aria-hidden="true" size={18} className="text-primary" />{t.contact.legal}</h2><p className="mt-3 text-muted-foreground">{COMPANY.legal}<br />NIF {COMPANY.nif}</p></div>
+        <div><h2 className="flex items-center gap-2 font-display font-semibold"><MapPin aria-hidden="true" size={18} className="text-primary-text" />{t.contact.address}</h2><address className="mt-3 not-italic text-muted-foreground">{COMPANY.address.map((a) => <span key={a}>{a}<br /></span>)}</address></div>
+        <div><h2 className="flex items-center gap-2 font-display font-semibold"><Building2 aria-hidden="true" size={18} className="text-primary-text" />{t.contact.legal}</h2><p className="mt-3 text-muted-foreground">{COMPANY.legal}<br />NIF {COMPANY.nif}</p></div>
         {preferences?.external ? (
           <iframe title={t.contact.address} className="aspect-square w-full rounded-sm border border-border" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Beco+dos+Travassos+20+Ad%C3%A9mia+Coimbra&output=embed" />
         ) : (

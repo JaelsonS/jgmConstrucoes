@@ -2,14 +2,13 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { Check, ArrowRight } from "lucide-react";
 import { DICT, PAGE_SLUGS, SERVICE_IDS, isLang, seoHead, serviceFromSlug, servicePaths, type Lang, type ServiceId } from "@/i18n/content";
 import { Faqs, PageHero, pageHref, serviceHref } from "@/components/site";
+import { StageImage } from "@/components/photo";
 import { EXTRA_CONTENT, articleBySlug, articlePaths } from "@/i18n/extended-content";
-import s2 from "@/assets/stage-2.jpg";
-import s3 from "@/assets/stage-3.jpg";
-import s4 from "@/assets/stage-4.jpg";
+import { STAGES, type StagePhoto } from "@/lib/photos";
 
-const IMG: Record<ServiceId, string> = {
-  buildings: s4, lsf: s2, renovations: s4, painting: s3, coverings: s2,
-  plastering: s2, glazing: s3, roofing: s4, etics: s3,
+const IMG: Record<ServiceId, StagePhoto> = {
+  buildings: STAGES[3], lsf: STAGES[1], renovations: STAGES[3], painting: STAGES[2], coverings: STAGES[1],
+  plastering: STAGES[1], glazing: STAGES[2], roofing: STAGES[3], etics: STAGES[2],
 };
 
 export const Route = createFileRoute("/$lang/$page/$service")({
@@ -43,7 +42,7 @@ function Article({ lang, slug }: { lang: Lang; slug: string }) {
   const article = articleBySlug(lang, slug)!;
   const t = EXTRA_CONTENT[lang];
   return (<>
-    <PageHero label={article.category} h1={article.title} lead={article.description} img={s2} />
+    <PageHero label={article.category} h1={article.title} lead={article.description} photo={STAGES[1]} />
     <article className="container-x max-w-3xl space-y-10 py-24">
       {article.sections.map((section) => (
         <section key={section.title}>
@@ -62,15 +61,15 @@ function Service({ lang, slug }: { lang: Lang; slug: string }) {
   const s = t.services[id];
   const L = t.service;
   return (<>
-    <PageHero label={t.nav.services} h1={s.name} lead={s.short} img={IMG[id]} />
+    <PageHero label={t.nav.services} h1={s.name} lead={s.short} photo={IMG[id]} />
     <section className="container-x grid gap-12 py-24 md:grid-cols-2">
       <p className="text-lg leading-relaxed">{s.intro}</p>
-      <figure><img src={IMG[id]} alt={`${s.name} — ${L.illustrative}`} width={1600} height={912} className="aspect-[4/3] w-full rounded-sm object-cover" /><figcaption className="mt-2 text-xs text-muted-foreground">{L.illustrative}</figcaption></figure>
+      <figure><StageImage photo={IMG[id]} alt={`${s.name} — ${L.illustrative}`} sizes="(min-width: 768px) 46vw, 92vw" imgClassName="aspect-[4/3] w-full rounded-sm object-cover" /><figcaption className="mt-2 text-xs text-muted-foreground">{L.illustrative}</figcaption></figure>
     </section>
     <section className="bg-card py-24">
       <div className="container-x grid gap-12 md:grid-cols-2">
         <div><h2 className="text-2xl font-bold">{L.problems}</h2><ul className="mt-6 space-y-3">{s.problems.map((x) => <li key={x} className="border-l-2 border-sky pl-4">{x}</li>)}</ul></div>
-        <div><h2 className="text-2xl font-bold">{L.benefits}</h2><ul className="mt-6 space-y-3">{s.benefits.map((x) => <li key={x} className="flex gap-3"><Check className="mt-0.5 shrink-0 text-primary" size={20} />{x}</li>)}</ul></div>
+        <div><h2 className="text-2xl font-bold">{L.benefits}</h2><ul className="mt-6 space-y-3">{s.benefits.map((x) => <li key={x} className="flex gap-3"><Check className="mt-0.5 shrink-0 text-primary-text" size={20} />{x}</li>)}</ul></div>
       </div>
     </section>
     <section className="bg-ink py-24 text-ink-foreground">
@@ -83,9 +82,9 @@ function Service({ lang, slug }: { lang: Lang; slug: string }) {
       <div className="md:col-span-2"><Faqs items={s.faqs} /></div>
     </section>
     <section className="container-x pb-24">
-      <h2 className="eyebrow text-primary">{L.related}</h2>
+      <h2 className="eyebrow text-primary-text">{L.related}</h2>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {SERVICE_IDS.filter((x) => x !== id).map((x) => <a key={x} href={serviceHref(lang, x)} className="group flex items-center justify-between rounded-sm border border-border p-6 hover:border-primary"><span className="font-display text-lg font-semibold">{t.services[x].name}</span><ArrowRight className="text-primary transition-transform group-hover:translate-x-1" /></a>)}
+        {SERVICE_IDS.filter((x) => x !== id).map((x) => <a key={x} href={serviceHref(lang, x)} className="group flex items-center justify-between rounded-sm border border-border p-6 hover:border-primary"><span className="font-display text-lg font-semibold">{t.services[x].name}</span><ArrowRight className="text-primary-text transition-transform group-hover:translate-x-1" /></a>)}
       </div>
       <div className="mt-16 rounded-sm bg-primary p-10"><p className="text-xl font-semibold text-primary-foreground">{L.ctaText}</p><a href={pageHref(lang, "contact")} className="btn mt-6 bg-ink text-ink-foreground hover:bg-ink/85">{L.cta}</a></div>
     </section>
