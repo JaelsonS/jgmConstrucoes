@@ -2,6 +2,8 @@
 
 Paleta extraída da logótipo oficial geométrica (azul elétrico, laranja solar, prata e preto).
 
+Para voz, tom e regras de copy nos três idiomas, ver [`CONTENT-AND-BRAND-GUIDE.md`](CONTENT-AND-BRAND-GUIDE.md).
+
 ## Cores
 
 | Token | Hex | Uso |

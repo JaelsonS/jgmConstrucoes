@@ -104,7 +104,7 @@ function useStoryProgress(storyRef: RefObject<HTMLElement | null>) {
     };
   }, [storyRef]);
 
-  return { subscribe, stage, reduced, visible, progressRef };
+  return { subscribe, stage, reduced, visible };
 }
 
 /** Fixed background: the house is built step by step within the story only */
@@ -113,13 +113,11 @@ function BuildBackdrop({
   subscribe,
   visible,
   reduced,
-  progressRef,
 }: {
   lang: Lang;
   subscribe: (listener: StoryListener) => () => void;
   visible: boolean;
   reduced: boolean;
-  progressRef: RefObject<number>;
 }) {
   const stages = DICT[lang].home.stages;
   const images = useRef<(HTMLImageElement | null)[]>([]);
@@ -167,7 +165,7 @@ function BuildBackdrop({
             className="absolute inset-0"
             imgClassName="h-full w-full object-cover"
             imgRef={(node) => { images.current[index] = node; }}
-            style={stageVisual(progressRef.current ?? 0, index, reduced)}
+            style={stageVisual(reduced ? 1 : 0, index, reduced)}
           />
         ))}
         <div className="absolute inset-0 shade-hero" />
@@ -208,28 +206,25 @@ function Home() {
   const lang = l as Lang;
   const d = DICT[lang];
   const t = d.home;
-  const completion = {
-    pt: { label: "Sequência ilustrativa", title: "O desenho acaba no edifício fechado.", text: "Estas imagens mostram a ordem habitual de uma obra: fundação, estrutura, envolvente e acabamentos. Não são fotografias de trabalhos da JGM. Para falar de uma obra real, descreva-a no pedido de orçamento.", cta: "Pedir orçamento" },
-    en: { label: "Illustrative sequence", title: "The drawing ends with the building closed.", text: "These images show the usual order of a build: foundation, structure, envelope and finishes. They are not photographs of JGM work. To talk about a real job, describe it in a quote request.", cta: "Ask for a quote" },
-    es: { label: "Secuencia ilustrativa", title: "El dibujo acaba en el edificio cerrado.", text: "Estas imágenes muestran el orden habitual de una obra: cimentación, estructura, envolvente y acabados. No son fotografías de trabajos de JGM. Para hablar de una obra real, descríbala en la solicitud de presupuesto.", cta: "Pedir presupuesto" },
-  }[lang];
+  const completion = t.completion;
   const storyRef = useRef<HTMLDivElement>(null);
-  const { subscribe, stage, reduced, visible, progressRef } = useStoryProgress(storyRef);
+  const { subscribe, stage, reduced, visible } = useStoryProgress(storyRef);
   return (
     <div className="relative isolate">
       <div ref={storyRef}>
-      <BuildBackdrop lang={lang} subscribe={subscribe} visible={visible} reduced={reduced} progressRef={progressRef} />
+      <BuildBackdrop lang={lang} subscribe={subscribe} visible={visible} reduced={reduced} />
 
       <section data-header-overlay className="relative flex min-h-screen items-end pb-20 text-ink-foreground">
         <div className="container-x relative animate-rise">
-          <p className="eyebrow text-sky">{t.eyebrow}</p>
+          <p className="font-display text-sm font-semibold uppercase tracking-[0.22em] text-sky md:text-base">{t.brand}</p>
+          <p className="mt-3 text-xs font-medium uppercase tracking-widest text-ink-muted md:text-sm">{t.eyebrow}</p>
           <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-[1.05] md:text-7xl">{t.h1}</h1>
           <p className="mt-6 max-w-2xl text-lg text-ink-foreground">{t.sub}</p>
           <div className="mt-10 flex flex-wrap gap-3">
-            <a href={pageHref(lang, "contact")} className="btn btn-primary">{t.cta1} <ArrowRight size={18} /></a>
+            <a href={pageHref(lang, "contact")} className="btn btn-primary">{t.cta1} <ArrowRight aria-hidden="true" size={18} /></a>
             <a href={pageHref(lang, "services")} className="btn btn-ghost-light">{t.cta2}</a>
           </div>
-          <a href="#intro" className="mt-14 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-ink-foreground"><ArrowDown size={14} /> {t.scroll}</a>
+          <a href="#intro" className="mt-14 inline-flex items-center gap-2 text-xs uppercase tracking-widest text-ink-foreground"><ArrowDown aria-hidden="true" size={14} /> {t.scroll}</a>
         </div>
       </section>
 

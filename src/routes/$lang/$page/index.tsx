@@ -42,7 +42,7 @@ function Page() {
   if (k === "about")
     return (<>
       <PageHero label={t.about.label} h1={t.about.h1} lead={t.about.lead} photo={STAGES[1]} />
-      <section className="container-x grid gap-8 py-24 md:grid-cols-3">
+      <section className="container-x grid gap-8 py-24 sm:grid-cols-2 lg:grid-cols-4">
         {t.about.blocks.map((b, i) => (
           <Reveal key={b.t}><span className="font-display text-4xl font-bold text-sky-text">0{i + 1}</span><h2 className="mt-3 text-2xl font-semibold">{b.t}</h2><p className="mt-3 text-muted-foreground">{b.d}</p></Reveal>
         ))}
@@ -127,11 +127,7 @@ function Page() {
 function CareerForm({ lang }: { lang: Lang }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [submissionId, setSubmissionId] = useState(() => crypto.randomUUID());
-  const copy = {
-    pt: { name: "Nome", email: "Email", phone: "Telefone (opcional)", area: "Área ou função", message: "Mensagem (opcional)", consent: "Li a Política de Privacidade e envio esta mensagem por minha iniciativa. Não é um pedido de entrevista.", submit: "Enviar mensagem", success: "Recebemos a mensagem. Não é um convite para entrevista nem uma proposta de trabalho.", error: "A mensagem não foi enviada. Verifique os dados e tente outra vez." },
-    en: { name: "Name", email: "Email", phone: "Phone (optional)", area: "Area or role", message: "Message (optional)", consent: "I have read the Privacy Policy and I am sending this message on my own initiative. It is not a request for an interview.", submit: "Send message", success: "We received the message. It is not an invitation to an interview and it is not a job offer.", error: "The message was not sent. Check the details and try again." },
-    es: { name: "Nombre", email: "Correo electrónico", phone: "Teléfono (opcional)", area: "Área o función", message: "Mensaje (opcional)", consent: "He leído la política de privacidad y envío este mensaje por mi cuenta. No es una solicitud de entrevista.", submit: "Enviar mensaje", success: "Hemos recibido el mensaje. No es una invitación a una entrevista ni una oferta de trabajo.", error: "El mensaje no se ha enviado. Revise los datos e inténtelo de nuevo." },
-  }[lang];
+  const copy = EXTRA_CONTENT[lang].careers.form;
   const field = "mt-2 w-full rounded-sm border border-input bg-background px-4 py-3 outline-none focus:border-primary";
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -184,11 +180,7 @@ function Contact({ lang }: { lang: Lang }) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [submissionId, setSubmissionId] = useState(() => crypto.randomUUID());
   const { preferences, allowExternal } = useConsent();
-  const messages = {
-    pt: { sending: "A enviar…", success: "Recebemos o pedido. A resposta usa os dados que indicou.", error: "O pedido não foi enviado. Verifique os dados e tente outra vez." },
-    en: { sending: "Sending…", success: "We received the request. Any reply will use the details you gave.", error: "The request was not sent. Check the details and try again." },
-    es: { sending: "Enviando…", success: "Hemos recibido la solicitud. La respuesta usa los datos que indicó.", error: "La solicitud no se ha enviado. Revise los datos e inténtelo de nuevo." },
-  }[lang];
+  const messages = { sending: f.sending, success: f.success, error: f.error };
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;

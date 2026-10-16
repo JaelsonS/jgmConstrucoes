@@ -16,29 +16,30 @@ import sora700 from "@fontsource/sora/files/sora-latin-700-normal.woff2?url";
 import sora700Ext from "@fontsource/sora/files/sora-latin-ext-700-normal.woff2?url";
 import { reportLovableError } from "../lib/error";
 import { SITE_CONFIG } from "../config/site";
+import { DICT, isLang, type Lang } from "../i18n/content";
 
 const SITE = SITE_CONFIG.canonicalOrigin;
 const OG_IMAGE = `${SITE}/og-image.png`;
 
+function useRouteLang(): Lang {
+  const lang = (useParams({ strict: false }) as { lang?: string }).lang;
+  return lang && isLang(lang) ? lang : "pt";
+}
+
 function NotFoundComponent() {
-  const lang = ((useParams({ strict: false }) as { lang?: string }).lang ?? "pt") as "pt" | "en" | "es";
-  const copy = {
-    pt: ["Página não encontrada", "A página que procura não existe ou foi movida.", "Voltar ao início"],
-    en: ["Page not found", "The page you are looking for does not exist or has been moved.", "Go home"],
-    es: ["Página no encontrada", "La página que busca no existe o ha cambiado de dirección.", "Volver al inicio"],
-  }[lang] ?? ["Página não encontrada", "A página que procura não existe ou foi movida.", "Voltar ao início"];
+  const e = DICT[useRouteLang()].errors;
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">{copy[0]}</h2>
-        <p className="mt-2 text-sm text-muted-foreground">{copy[1]}</p>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">{e.notFoundTitle}</h2>
+        <p className="mt-2 text-sm text-muted-foreground">{e.notFoundText}</p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            {copy[2]}
+            {e.notFoundCta}
           </Link>
         </div>
       </div>
@@ -49,12 +50,7 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  const lang = ((useParams({ strict: false }) as { lang?: string }).lang ?? "pt") as "pt" | "en" | "es";
-  const copy = {
-    pt: ["Não foi possível carregar esta página", "Ocorreu um erro. Tente novamente ou volte ao início.", "Tentar novamente", "Voltar ao início"],
-    en: ["This page did not load", "Something went wrong. Try again or return home.", "Try again", "Go home"],
-    es: ["No se pudo cargar esta página", "Se produjo un error. Inténtelo de nuevo o vuelva al inicio.", "Intentar de nuevo", "Volver al inicio"],
-  }[lang] ?? ["Não foi possível carregar esta página", "Ocorreu um erro. Tente novamente ou volte ao início.", "Tentar novamente", "Voltar ao início"];
+  const e = DICT[useRouteLang()].errors;
   useEffect(() => {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
@@ -63,10 +59,10 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          {copy[0]}
+          {e.loadTitle}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          {copy[1]}
+          {e.loadText}
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -76,13 +72,13 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            {copy[2]}
+            {e.retry}
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            {copy[3]}
+            {e.home}
           </a>
         </div>
       </div>
@@ -96,9 +92,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "JGM Construções" },
-      { name: "description", content: "Construção, remodelações, pintura e isolamento térmico a partir de Adémia, Coimbra." },
+      { name: "description", content: "Construção, remodelações, pintura e isolamento térmico. Sede em Adémia, Coimbra." },
       { property: "og:title", content: "JGM Construções" },
-      { property: "og:description", content: "Construção, remodelações, pintura e isolamento térmico a partir de Adémia, Coimbra." },
+      { property: "og:description", content: "Construção, remodelações, pintura e isolamento térmico. Sede em Adémia, Coimbra." },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE },
       { property: "og:image", content: OG_IMAGE },
@@ -109,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "theme-color", content: "#0A0C10" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "JGM Construções" },
-      { name: "twitter:description", content: "Construção, remodelações, pintura e isolamento térmico a partir de Adémia, Coimbra." },
+      { name: "twitter:description", content: "Construção, remodelações, pintura e isolamento térmico. Sede em Adémia, Coimbra." },
       { name: "twitter:image", content: OG_IMAGE },
     ],
     links: [
@@ -142,7 +138,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             addressRegion: "Coimbra",
             addressCountry: "PT",
           },
-          areaServed: { "@type": "AdministrativeArea", name: "Coimbra" },
         }),
       },
     ],

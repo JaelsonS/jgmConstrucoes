@@ -24,6 +24,17 @@ type ExtraContent = {
     notice: string;
     noUpload: string;
     voluntary: string;
+    form: {
+      name: string;
+      email: string;
+      phone: string;
+      area: string;
+      message: string;
+      consent: string;
+      submit: string;
+      success: string;
+      error: string;
+    };
   };
   blog: {
     read: string;
@@ -78,6 +89,17 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       notice: "Neste momento o site não recebe currículos.",
       noUpload: "O envio de ficheiros fica desligado enquanto não houver um sítio privado para os guardar, controlo de quem lhes acede e um prazo de eliminação definido.",
       voluntary: "Se mais tarde houver uma candidatura, será voluntária. Não é um convite para entrevista nem uma promessa de contratação.",
+      form: {
+        name: "Nome",
+        email: "Email",
+        phone: "Telefone (opcional)",
+        area: "Área ou função",
+        message: "Mensagem (opcional)",
+        consent: "Li a Política de Privacidade e envio esta mensagem por minha iniciativa. Não é um pedido de entrevista.",
+        submit: "Enviar mensagem",
+        success: "Recebemos a mensagem. Não é um convite para entrevista nem uma proposta de trabalho.",
+        error: "A mensagem não foi enviada. Verifique os dados e tente outra vez.",
+      },
     },
     blog: {
       read: "Ler artigo",
@@ -184,7 +206,22 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       ],
       reviewRequired: "This information requires legal review and confirmation of the privacy contact and retention periods before launch.",
     },
-    careers: { notice: "This site does not take CVs at the moment.", noUpload: "File upload stays off until there is a private place to store them, control over who can open them, and a set period after which they are deleted.", voluntary: "If an application is possible later, it will be voluntary. It is not an invitation to an interview and it is not a promise of a job." },
+    careers: {
+      notice: "This site does not take CVs at the moment.",
+      noUpload: "File upload stays off until there is a private place to store them, control over who can open them, and a set period after which they are deleted.",
+      voluntary: "If an application is possible later, it will be voluntary. It is not an invitation to an interview and it is not a promise of a job.",
+      form: {
+        name: "Name",
+        email: "Email",
+        phone: "Phone (optional)",
+        area: "Area or role",
+        message: "Message (optional)",
+        consent: "I have read the Privacy Policy and I am sending this message on my own initiative. It is not a request for an interview.",
+        submit: "Send message",
+        success: "We received the message. It is not an invitation to an interview and it is not a job offer.",
+        error: "The message was not sent. Check the details and try again.",
+      },
+    },
     blog: {
       read: "Read article",
       back: "Back to articles",
@@ -290,7 +327,22 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       ],
       reviewRequired: "Este documento requiere revisión jurídica y confirmación del contacto de privacidad y de los plazos de conservación antes del lanzamiento.",
     },
-    careers: { notice: "En este momento el sitio no recibe currículos.", noUpload: "El envío de archivos sigue desactivado mientras no haya un lugar privado donde guardarlos, control de quién puede abrirlos y un plazo de eliminación definido.", voluntary: "Si más adelante hubiera una candidatura, será voluntaria. No es una invitación a una entrevista ni una promesa de contratación." },
+    careers: {
+      notice: "En este momento el sitio no recibe currículos.",
+      noUpload: "El envío de archivos sigue desactivado mientras no haya un lugar privado donde guardarlos, control de quién puede abrirlos y un plazo de eliminación definido.",
+      voluntary: "Si más adelante hubiera una candidatura, será voluntaria. No es una invitación a una entrevista ni una promesa de contratación.",
+      form: {
+        name: "Nombre",
+        email: "Correo electrónico",
+        phone: "Teléfono (opcional)",
+        area: "Área o función",
+        message: "Mensaje (opcional)",
+        consent: "He leído la política de privacidad y envío este mensaje por mi cuenta. No es una solicitud de entrevista.",
+        submit: "Enviar mensaje",
+        success: "Hemos recibido el mensaje. No es una invitación a una entrevista ni una oferta de trabajo.",
+        error: "El mensaje no se ha enviado. Revise los datos e inténtelo de nuevo.",
+      },
+    },
     blog: {
       read: "Leer artículo",
       back: "Volver a los artículos",

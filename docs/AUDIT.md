@@ -1,6 +1,17 @@
 # Auditoria técnica — JGM Construções
 
-Data da auditoria: 16 de outubro de 2026.
+Data da auditoria: 16 de outubro de 2026.  
+Atualização (mesma data): reposicionamento editorial (sede ≠ limite de mercado), copy nos 3 idiomas, i18n de strings hardcoded, documentação alargada — ver [`CHANGELOG.md`](CHANGELOG.md).
+
+## Diagnóstico (síntese desta passagem)
+
+| Dimensão | Preservar | Fraco / corrigido | Em falta (depende do cliente) |
+| --- | --- | --- | --- |
+| Técnica | SSR, schemas, consentimento, animação, headers | Copy demasiado “só Coimbra”; strings fora do i18n | Email de produção, rate limit edge |
+| Comercial | Serviços claros, processo de orçamento honesto | Hero sem marca como sinal principal | Área exata, fotos reais, telefone |
+| Docs | AUDIT/OPS parciais | Suite incompleta face a onboarding sénior | Revisão jurídica |
+
+Riscos de modificar: quebrar slugs/`hreflang`, degradar LCP da animação, simular envio de formulário. Mitigação: testes de slugs/sitemap, reduced-motion, sem sucesso sem `accepted`.
 
 ## Estado inicial
 

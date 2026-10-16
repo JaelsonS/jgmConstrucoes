@@ -2,7 +2,9 @@
 
 ## Objetivo
 
-Website institucional SSR da JGM Construções, orientado a conversão, SEO local e apresentação visual premium. A arquitetura evita base de dados enquanto os únicos fluxos de dados forem contacto e manifestação de interesse profissional.
+Website institucional SSR da JGM Construções, orientado a conversão, SEO (com sede comunicada em Coimbra sem limitar artificialmente o mercado) e apresentação visual premium. A arquitetura evita base de dados enquanto os únicos fluxos de dados forem contacto e manifestação de interesse profissional.
+
+Documentação complementar: [`PROJECT-STRUCTURE.md`](PROJECT-STRUCTURE.md), [`DECISIONS.md`](DECISIONS.md), [`CONTENT-AND-BRAND-GUIDE.md`](CONTENT-AND-BRAND-GUIDE.md).
 
 ## Módulos
 
@@ -56,9 +58,27 @@ Quatro imagens locais representam fundação, estrutura, envolvente e conclusão
 
 Os assets `src/assets/stage-*.jpg` são parte funcional da experiência e não devem ser removidos sem substituir a sequência completa.
 
+## Fluxo de pedido (visão)
+
+```mermaid
+sequenceDiagram
+  participant U as Visitante
+  participant UI as Formulário
+  participant SF as contact.server
+  participant E as Email provider
+  U->>UI: Preenche pedido
+  UI->>UI: Validação local
+  UI->>SF: Payload limitado + submissionId
+  SF->>SF: Zod + honeypot + rate limit
+  SF->>E: Envio com timeout
+  E-->>SF: Aceite / rejeição
+  SF-->>UI: accepted true/false
+```
+
 ## Decisões de evolução
 
 - Adicionar base de dados apenas quando existir uma necessidade real de histórico, workflow ou recuperação.
 - Adicionar CMS apenas quando a frequência/editorial do blog justificar autenticação, preview e publicação.
 - Adicionar uploads de CV apenas com armazenamento privado, análise antimalware, acesso temporário e eliminação automática.
 - Manter integrações externas atrás de consentimento e configuração central.
+- Confirmar área de intervenção e serviços operacionais antes de alargar claims de SEO local ([`OPEN-QUESTIONS.md`](OPEN-QUESTIONS.md)).

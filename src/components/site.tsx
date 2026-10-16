@@ -282,7 +282,7 @@ export function PageHero({ label, h1, lead, photo }: { label: string; h1: string
     <section data-header-overlay className="relative overflow-hidden bg-ink pb-20 pt-36 text-ink-foreground md:pb-28 md:pt-44">
       {photo && <><StageImage photo={photo} alt="" sizes="100vw" priority fetchPriority="low" className="absolute inset-0" imgClassName="h-full w-full object-cover opacity-40" /><div className="absolute inset-0 shade-hero" /></>}
       <div className="container-x relative animate-rise">
-        <nav aria-label="Breadcrumb" className="mb-5 text-xs text-ink-muted">
+        <nav aria-label={DICT[lang].ui.breadcrumb} className="mb-5 text-xs text-ink-muted">
           <a href={`/${lang}`} className="hover:text-sky">{homeLabel}</a>
           <span aria-hidden="true" className="mx-2">/</span>
           <span aria-current="page">{label}</span>
