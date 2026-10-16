@@ -6,9 +6,9 @@ Documentação do sistema implementado no website da JGM Construções. Descreve
 
 | Peça | Local | Função |
 | --- | --- | --- |
-| Preferências de cookies | `src/components/consent.tsx` | Banner inicial + painel + botão discreto (esquerda) |
+| Preferências de cookies | `src/components/consent.tsx` | Banner inicial + painel + FAB discreto (esquerda, Lucide `Cookie`) |
 | Textos de consentimento | `src/i18n/extended-content.ts` → `consent` | PT / EN / ES |
-| Assistente comercial | `src/components/sales-assistant.tsx` | Widget inferior direito |
+| Assistente comercial | `src/components/sales-assistant.tsx` | FAB circular inferior direito (Lucide `Bot`) + painel |
 | Máquina de estados | `src/lib/assistant/machine.ts` | Transições determinísticas |
 | Copy do assistente | `src/i18n/assistant-content.ts` | Perguntas, opções, WhatsApp |
 | Mensagens WhatsApp | `src/lib/assistant/message.ts` + `src/lib/whatsapp.ts` | Texto + URL `wa.me` |
@@ -29,17 +29,18 @@ Não existem categorias de analytics, publicidade ou rastreadores no projeto. O 
 ### Fluxos
 
 1. **Primeira visita:** banner “Preferências de cookies” (aceitar necessários + mapa / apenas necessários / personalizar).
-2. **Depois de uma escolha:** banner fecha; aparece o botão discreto no canto inferior esquerdo (ícone de cookie, `aria-label` localizado).
+2. **Depois de uma escolha:** banner fecha; aparece o FAB discreto no canto inferior esquerdo (círculo pequeno, ícone Lucide `Cookie`, `aria-label`/`title` localizados; margens com `safe-area-inset`).
 3. **Reabrir:** botão esquerdo, ou “Preferências de cookies” no footer (`openConsentPreferences`).
 4. **Retirar consentimento do mapa:** personalizar → desmarcar conteúdo externo → guardar (`external: false`). O mapa deixa de carregar sem recarregar a página inteira (evento `jgm-consent-change`).
 
-O assistente comercial **não** depende do consentimento de cookies.
+O assistente comercial **não** depende do consentimento de cookies. O FAB de cookies (`z-55`, esquerda) e o do assistente (`z-60`, direita) não se sobrepõem.
 
 ## Assistente comercial
 
 ### Princípios
 
 - É um assistente virtual da JGM (não simula atendimento humano em tempo real).
+- FAB circular com ícone Lucide `Bot` (não emoji); label/tooltip localizados; margens com `safe-area-inset` à direita e em baixo.
 - Fluxo guiado por opções; texto livre só onde é útil (outro serviço, localização, descrição, dimensão).
 - Idioma da conversa escolhido no início; independente do idioma da página.
 - Estado guardado em `sessionStorage` (`jgm-assistant-v1`) durante a sessão do separador — fecha e reabre sem perder respostas; não envia dados a servidores.

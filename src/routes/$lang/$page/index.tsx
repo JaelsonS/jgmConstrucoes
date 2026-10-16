@@ -6,6 +6,7 @@ import { CtaBand, Faqs, PageHero, Reveal, pageHref, serviceHref } from "@/compon
 import { StageImage } from "@/components/photo";
 import { EXTRA_CONTENT } from "@/i18n/extended-content";
 import { useConsent } from "@/components/consent";
+import { PhoneInput, validatePhoneField } from "@/components/phone-input";
 import { CONTACT_SERVICES } from "@/lib/contact-schema";
 import { sendContactRequest } from "@/lib/contact.server";
 import { sendCareerInterest } from "@/lib/career.server";
@@ -13,6 +14,18 @@ import { STAGES, type StagePhoto } from "@/lib/photos";
 import { ASSISTANT_CONTENT } from "@/i18n/assistant-content";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { CONTACTS } from "@/config/contacts";
+
+function phoneFieldCopy(lang: Lang) {
+  const f = DICT[lang].contact.form;
+  return {
+    country: f.phoneCountry,
+    search: f.phoneSearch,
+    searchPlaceholder: f.phoneSearchPlaceholder,
+    number: f.phoneNumber,
+    invalid: f.phoneInvalid,
+    noResults: f.phoneNoResults,
+  };
+}
 
 const SERVICE_PAGE_IMG: Record<ServiceId, StagePhoto> = {
   buildings: STAGES[3], lsf: STAGES[1], renovations: STAGES[3], painting: STAGES[2], coverings: STAGES[0],
@@ -163,7 +176,13 @@ function CareerForm({ lang }: { lang: Lang }) {
       <div className="absolute -left-[9999px]" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
       <label className="text-sm font-semibold">{copy.name} *<input required name="name" autoComplete="name" maxLength={120} className={field} /></label>
       <label className="text-sm font-semibold">{copy.email} *<input required name="email" type="email" autoComplete="email" maxLength={254} className={field} /></label>
-      <label className="text-sm font-semibold">{copy.phone}<input name="phone" type="tel" autoComplete="tel" maxLength={40} className={field} /></label>
+      <PhoneInput
+        key={submissionId}
+        lang={lang}
+        copy={phoneFieldCopy(lang)}
+        label={copy.phone}
+        className="text-sm font-semibold"
+      />
       <label className="text-sm font-semibold">{copy.area} *<input required name="area" maxLength={120} className={field} /></label>
       <label className="text-sm font-semibold md:col-span-2">{copy.message}<textarea name="message" rows={4} maxLength={1500} className={field} /></label>
       <label className="flex items-start gap-3 text-sm md:col-span-2"><input required type="checkbox" className="mt-1 h-4 w-4 accent-primary" /><span>{copy.consent} <a href={pageHref(lang, "privacy")} className="underline">{DICT[lang].footer.privacy}</a></span></label>
@@ -191,6 +210,8 @@ function Contact({ lang }: { lang: Lang }) {
     const er: Record<string, string> = {};
     for (const n of ["name", "email", "service", "message"]) if (!String(d.get(n) ?? "").trim()) er[n] = f.required;
     if (!er["email"] && !/^\S+@\S+\.\S+$/.test(String(d.get("email")))) er["email"] = f.invalidEmail;
+    const phoneError = validatePhoneField(String(d.get("phone") ?? ""), f.phoneInvalid);
+    if (phoneError) er["phone"] = phoneError;
     setErrors(er);
     if (Object.keys(er).length > 0) {
       setStatus("idle");
@@ -229,7 +250,15 @@ function Contact({ lang }: { lang: Lang }) {
         <div className="absolute -left-[9999px]" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
         <label className="text-sm font-semibold">{f.name} *<input name="name" autoComplete="name" maxLength={120} className={field} aria-invalid={!!errors["name"]} aria-describedby={errors["name"] ? "name-err" : undefined} />{fieldError("name")}</label>
         <label className="text-sm font-semibold">{f.email} *<input name="email" type="email" autoComplete="email" maxLength={254} className={field} aria-invalid={!!errors["email"]} aria-describedby={errors["email"] ? "email-err" : undefined} />{fieldError("email")}</label>
-        <label className="text-sm font-semibold">{f.phone} <span className="font-normal text-muted-foreground">({f.optional})</span><input name="phone" type="tel" autoComplete="tel" maxLength={40} className={field} /></label>
+        <PhoneInput
+          key={submissionId}
+          lang={lang}
+          copy={phoneFieldCopy(lang)}
+          label={f.phone}
+          optionalHint={`(${f.optional})`}
+          className="text-sm font-semibold"
+          error={errors["phone"]}
+        />
         <label className="text-sm font-semibold">{f.service} *
           <select name="service" defaultValue="" className={field} aria-invalid={!!errors["service"]} aria-describedby={errors["service"] ? "service-err" : undefined}>
             <option value="" disabled>{f.choose}</option>

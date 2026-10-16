@@ -9,10 +9,10 @@ jgmConstrucoes/
 ├── public/                 # Estáticos servidos na raiz (favicon, OG, robots, sitemap)
 ├── src/
 │   ├── assets/             # Marca + stages JPG + variantes otimizadas (opt/)
-│   ├── components/         # UI partilhada (site, consent, sales-assistant, photo)
+│   ├── components/         # UI partilhada (site, consent, sales-assistant, phone-input, photo)
 │   ├── config/             # Site, marca, contactos (WhatsApp / redes)
 │   ├── i18n/               # Conteúdos PT / EN / ES (+ assistant-content)
-│   ├── lib/                # Schemas, server, assistant FSM, WhatsApp, fotos, erros
+│   ├── lib/                # Schemas, phone (E.164), server, assistant FSM, WhatsApp, fotos, erros
 │   ├── routes/             # Rotas file-based TanStack
 │   ├── styles.css          # Tokens e utilitários Tailwind
 │   └── test/               # Vitest
@@ -53,6 +53,12 @@ jgmConstrucoes/
 - **Responsabilidade:** fluxo comercial guiado, resumo e encaminhamento WhatsApp.
 - **Cuidados:** estado só em `sessionStorage`; copy em `assistant-content.ts`; número em `config/contacts.ts`.
 - **Detalhe:** [`SALES-ASSISTANT-AND-CONSENT.md`](SALES-ASSISTANT-AND-CONSENT.md).
+
+### `src/components/phone-input.tsx` + `src/lib/phone.ts`
+
+- **Responsabilidade:** seletor de país + número nacional; valor oculto em E.164; validação com `libphonenumber-js`.
+- **Usado em:** formulários de contacto e carreiras.
+- **Cuidados:** PT (`+351`) por predefinição; não alterar o WhatsApp da empresa; lista de países curada.
 
 ### `src/components/photo.tsx` + `src/lib/photos.ts`
 

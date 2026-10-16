@@ -2,6 +2,15 @@
 
 Registo das alterações desta passagem de produto (outubro 2026). Distingue tipo de mudança.
 
+## Refinamento UI/UX — ícones, FABs e telefone (passagem seguinte)
+
+- Assistente: FAB circular com Lucide `Bot`, margens/`safe-area-inset`, painel com altura limitada ao viewport.
+- Cookies: FAB esquerdo mais discreto (círculo menor, contraste suave, Lucide `Cookie`).
+- Formulários contacto/carreiras: `PhoneInput` com seletor de país (PT +351), pesquisa, valor E.164 e validação `libphonenumber-js`.
+- i18n PT/EN/ES para rótulos/erros do telefone; testes em `src/test/phone.test.ts`.
+- Dependência adicionada: `libphonenumber-js` (ver D8 em [`DECISIONS.md`](DECISIONS.md)).
+- **Não publicado automaticamente em produção.**
+
 ## Assistente comercial, cookies e contactos (passagem seguinte)
 
 - Preferências de cookies: nomenclatura corrigida; botão discreto inferior esquerdo; categorias reais (necessários + mapa).

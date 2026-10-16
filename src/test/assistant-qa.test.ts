@@ -253,4 +253,13 @@ describe("contact source of truth", () => {
       expect(src).not.toMatch(/351911040509/);
     }
   });
+
+  it("uses a professional Bot launcher icon and safe-area aware shell", () => {
+    const src = readFileSync(resolve(process.cwd(), "src/components/sales-assistant.tsx"), "utf8");
+    expect(src).toContain("Bot");
+    expect(src).toContain("safe-area-inset-bottom");
+    expect(src).toContain("safe-area-inset-right");
+    expect(src).toContain("rounded-full");
+  });
 });
+

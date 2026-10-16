@@ -54,3 +54,11 @@ Registo das decisões relevantes para manutenção futura. Formato: problema →
 - **Problema:** dezenas de componentes sem referência.
 - **Escolha:** remover e manter UI própria + Lucide.
 - **Razão:** menos dependências e superfície de manutenção.
+
+## D8 — Telefone internacional com `libphonenumber-js`
+
+- **Problema:** campos `tel` simples aceitavam qualquer sequência de dígitos e não separavam país do número.
+- **Alternativas:** máscara manual; `react-phone-number-input`; validação só por comprimento; `libphonenumber-js`.
+- **Escolha:** `libphonenumber-js` + componente próprio `PhoneInput` (`src/components/phone-input.tsx`), PT (`+351`) por predefinição, valor enviado em E.164.
+- **Razão:** biblioteca mantida, sem UI React acoplada (compatível com React 19 / TanStack Start), validação real por país, bundle relativamente pequeno.
+- **Limite:** lista de países curada (não cobertura mundial completa); bandeiras via emoji regional indicator (identificador visual do seletor, não ícone de UI genérico).

@@ -91,11 +91,15 @@ function ConsentPreferencesTrigger({
     <button
       type="button"
       onClick={openConsentPreferences}
-      className="fixed bottom-4 left-4 z-[60] flex h-11 w-11 items-center justify-center rounded-sm border border-border bg-background/95 text-foreground shadow-md backdrop-blur-sm transition hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary md:bottom-5 md:left-5"
+      className="fixed z-[55] flex h-9 w-9 items-center justify-center rounded-full border border-border/70 bg-background/80 text-muted-foreground shadow-sm backdrop-blur-sm transition hover:border-border hover:bg-background hover:text-foreground hover:shadow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+      style={{
+        left: "max(1rem, env(safe-area-inset-left, 0px))",
+        bottom: "max(1.25rem, env(safe-area-inset-bottom, 0px))",
+      }}
       aria-label={label}
       title={label}
     >
-      <Cookie aria-hidden="true" size={18} strokeWidth={1.75} />
+      <Cookie aria-hidden="true" size={15} strokeWidth={1.75} />
     </button>
   );
 }

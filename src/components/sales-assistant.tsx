@@ -9,6 +9,7 @@ import {
 } from "react";
 import {
   ArrowLeft,
+  Bot,
   MessageCircle,
   RotateCcw,
   Send,
@@ -488,14 +489,20 @@ export function SalesAssistant() {
   };
 
   return (
-    <div className="pointer-events-none fixed bottom-4 right-4 z-[60] flex flex-col items-end gap-3 md:bottom-5 md:right-5">
+    <div
+      className="pointer-events-none fixed z-[60] flex flex-col items-end gap-3"
+      style={{
+        right: "max(1.25rem, env(safe-area-inset-right, 0px))",
+        bottom: "max(1.25rem, env(safe-area-inset-bottom, 0px))",
+      }}
+    >
       {open && (
         <div
           ref={panelRef}
           role="dialog"
           aria-modal="true"
           aria-labelledby={titleId}
-          className="pointer-events-auto flex max-h-[min(70dvh,34rem)] w-[min(100vw-2rem,22rem)] flex-col overflow-hidden rounded-sm border border-border bg-background shadow-2xl"
+          className="pointer-events-auto flex max-h-[min(calc(100dvh-6.5rem),34rem)] w-[min(calc(100vw-2.5rem),22rem)] flex-col overflow-hidden rounded-sm border border-border bg-background shadow-2xl"
         >
           <header className="flex shrink-0 items-start justify-between gap-3 border-b border-border bg-ink px-4 py-3 text-ink-foreground">
             <div>
@@ -579,13 +586,22 @@ export function SalesAssistant() {
 
       <button
         type="button"
-        className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-sm border border-border bg-ink text-ink-foreground shadow-lg transition hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        className={`pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border text-ink-foreground shadow-md transition duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+          open
+            ? "border-sky/50 bg-ink ring-2 ring-sky/30"
+            : "border-ink/80 bg-ink hover:border-sky hover:bg-ink/95 hover:shadow-lg"
+        }`}
         aria-label={open ? t.launcher.close : ui.launcher.open}
+        title={open ? t.launcher.close : ui.launcher.open}
         aria-expanded={open}
         aria-controls={open ? titleId : undefined}
         onClick={() => setOpen((v) => !v)}
       >
-        {open ? <X aria-hidden="true" size={20} /> : <MessageCircle aria-hidden="true" size={20} />}
+        {open ? (
+          <X aria-hidden="true" size={18} strokeWidth={1.75} />
+        ) : (
+          <Bot aria-hidden="true" size={20} strokeWidth={1.75} className="text-sky" />
+        )}
       </button>
     </div>
   );
