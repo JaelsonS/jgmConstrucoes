@@ -13,34 +13,64 @@ export type ConsentPreferences = {
   external: boolean;
 };
 
-function readPreferences(): ConsentPreferences | null {
+/** Cache estável para useSyncExternalStore (Object.is) — evita React #185. */
+let cachedRaw: string | null = null;
+let cachedPrefs: ConsentPreferences | null = null;
+
+function getPreferencesSnapshot(): ConsentPreferences | null {
   if (typeof window === "undefined") return null;
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (raw === cachedRaw) return cachedPrefs;
+  cachedRaw = raw;
   try {
-    const value = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null") as Partial<ConsentPreferences> | null;
-    return value && typeof value.external === "boolean"
-      ? { necessary: true, external: value.external }
-      : null;
+    const value = JSON.parse(raw ?? "null") as Partial<ConsentPreferences> | null;
+    cachedPrefs =
+      value && typeof value.external === "boolean"
+        ? { necessary: true, external: value.external }
+        : null;
   } catch {
-    return null;
+    cachedPrefs = null;
   }
+  return cachedPrefs;
+}
+
+function invalidatePreferencesCache() {
+  cachedRaw = null;
 }
 
 function subscribePreferences(onChange: () => void) {
-  window.addEventListener(CONSENT_EVENT, onChange);
-  window.addEventListener("storage", onChange);
+  const notify = () => {
+    invalidatePreferencesCache();
+    onChange();
+  };
+  window.addEventListener(CONSENT_EVENT, notify);
+  window.addEventListener("storage", notify);
   return () => {
-    window.removeEventListener(CONSENT_EVENT, onChange);
-    window.removeEventListener("storage", onChange);
+    window.removeEventListener(CONSENT_EVENT, notify);
+    window.removeEventListener("storage", notify);
   };
 }
 
 function persist(preferences: ConsentPreferences) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+  invalidatePreferencesCache();
   window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: preferences }));
 }
 
+function useIsClient() {
+  return useSyncExternalStore(
+    () => () => undefined,
+    () => true,
+    () => false,
+  );
+}
+
 export function useConsent() {
-  const preferences = useSyncExternalStore(subscribePreferences, readPreferences, () => null);
+  const preferences = useSyncExternalStore(
+    subscribePreferences,
+    getPreferencesSnapshot,
+    () => null,
+  );
   return {
     preferences,
     allowExternal: () => persist({ necessary: true, external: true }),
@@ -55,19 +85,19 @@ export function ConsentManager() {
   const params = useParams({ strict: false }) as { lang?: string };
   const lang: Lang = params.lang && isLang(params.lang) ? params.lang : "pt";
   const t = EXTRA_CONTENT[lang].consent;
-  const preferences = useSyncExternalStore(subscribePreferences, readPreferences, () => null);
-  const hydrated = useSyncExternalStore(
-    () => () => undefined,
-    () => true,
-    () => false,
+  const preferences = useSyncExternalStore(
+    subscribePreferences,
+    getPreferencesSnapshot,
+    () => null,
   );
+  const isClient = useIsClient();
   const [manualOpen, setManualOpen] = useState(false);
   const [customising, setCustomising] = useState(false);
   const [external, setExternal] = useState(false);
 
   useEffect(() => {
     const show = () => {
-      setExternal(readPreferences()?.external ?? false);
+      setExternal(getPreferencesSnapshot()?.external ?? false);
       setCustomising(true);
       setManualOpen(true);
     };
@@ -76,7 +106,7 @@ export function ConsentManager() {
   }, []);
 
   const hasStoredChoice = preferences !== null;
-  const open = hydrated && (manualOpen || !hasStoredChoice);
+  const open = isClient && (manualOpen || !hasStoredChoice);
 
   const choose = (value: boolean) => {
     persist({ necessary: true, external: value });
