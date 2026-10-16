@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="JGM">
+  <rect width="64" height="64" rx="12" fill="#0A0C10"/>
+  <path d="M32 8 50 20 44 24 32 16 20 24 14 20Z" fill="url(#b)"/>
+  <path d="M32 14 42 21 32 27 22 21Z" fill="url(#o)"/>
+  <path d="M14 44 20 40 32 48 44 40 50 44 32 56Z" fill="url(#b)"/>
+  <path d="M22 43 32 49 42 43 32 37Z" fill="url(#o)"/>
+  <text x="32" y="40" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="800" fill="#00B4F0">J</text>
+  <defs>
+    <linearGradient id="b" x1="14" y1="8" x2="50" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00B4F0"/><stop offset="1" stop-color="#003CCC"/>
+    </linearGradient>
+    <linearGradient id="o" x1="22" y1="14" x2="42" y2="49" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FCA80C"/><stop offset="1" stop-color="#E86A08"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,22 @@
+# Dependencies and build output
+node_modules/
+dist/
+.output/
+.vinxi/
+.wrangler/
+coverage/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local tooling
+.DS_Store
+*.log
+.idea/
+.vscode/
+
+# Temporary uploads must never be served or committed
+uploads/
+tmp/

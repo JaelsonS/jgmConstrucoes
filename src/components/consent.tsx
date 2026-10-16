@@ -1,0 +1,127 @@
+import { useEffect, useState } from "react";
+import { Settings2, X } from "lucide-react";
+import { useParams } from "@tanstack/react-router";
+import { isLang, type Lang } from "@/i18n/content";
+import { EXTRA_CONTENT } from "@/i18n/extended-content";
+
+const STORAGE_KEY = "jgm-consent-v1";
+const CONSENT_EVENT = "jgm-consent-change";
+
+export type ConsentPreferences = {
+  necessary: true;
+  external: boolean;
+};
+
+function readPreferences(): ConsentPreferences | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const value = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null") as Partial<ConsentPreferences> | null;
+    return value && typeof value.external === "boolean"
+      ? { necessary: true, external: value.external }
+      : null;
+  } catch {
+    return null;
+  }
+}
+
+function persist(preferences: ConsentPreferences) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+  window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: preferences }));
+}
+
+export function useConsent() {
+  const [preferences, setPreferences] = useState<ConsentPreferences | null>(null);
+  useEffect(() => {
+    const sync = (event?: Event) => {
+      const detail = (event as CustomEvent<ConsentPreferences> | undefined)?.detail;
+      setPreferences(detail ?? readPreferences());
+    };
+    sync();
+    window.addEventListener(CONSENT_EVENT, sync);
+    return () => window.removeEventListener(CONSENT_EVENT, sync);
+  }, []);
+  return {
+    preferences,
+    allowExternal: () => persist({ necessary: true, external: true }),
+  };
+}
+
+export function openConsentPreferences() {
+  window.dispatchEvent(new Event("jgm-consent-open"));
+}
+
+export function ConsentManager() {
+  const params = useParams({ strict: false }) as { lang?: string };
+  const lang: Lang = params.lang && isLang(params.lang) ? params.lang : "pt";
+  const t = EXTRA_CONTENT[lang].consent;
+  const [open, setOpen] = useState(false);
+  const [customising, setCustomising] = useState(false);
+  const [external, setExternal] = useState(false);
+  const [hasStoredChoice, setHasStoredChoice] = useState(false);
+
+  useEffect(() => {
+    const current = readPreferences();
+    setOpen(!current);
+    setHasStoredChoice(Boolean(current));
+    setExternal(current?.external ?? false);
+    const show = () => {
+      const latest = readPreferences();
+      setExternal(latest?.external ?? false);
+      setHasStoredChoice(Boolean(latest));
+      setCustomising(true);
+      setOpen(true);
+    };
+    window.addEventListener("jgm-consent-open", show);
+    return () => window.removeEventListener("jgm-consent-open", show);
+  }, []);
+
+  const choose = (value: boolean) => {
+    persist({ necessary: true, external: value });
+    setOpen(false);
+    setCustomising(false);
+  };
+
+  if (!open) return null;
+
+  return (
+    <section
+      aria-labelledby="consent-title"
+      className="fixed inset-x-4 bottom-4 z-[70] mx-auto max-w-3xl rounded-sm border border-border bg-background p-5 shadow-2xl"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h2 id="consent-title" className="font-display text-lg font-semibold">{t.title}</h2>
+          <p className="mt-2 text-sm text-muted-foreground">{t.text}</p>
+        </div>
+        {hasStoredChoice && (
+          <button type="button" onClick={() => setOpen(false)} className="rounded-sm p-2 focus-visible:outline-2 focus-visible:outline-primary" aria-label="Fechar">
+            <X aria-hidden="true" size={18} />
+          </button>
+        )}
+      </div>
+      {customising && (
+        <div className="mt-5 space-y-3 border-y border-border py-4">
+          <div className="flex items-start justify-between gap-4">
+            <div><strong className="text-sm">{t.necessary}</strong><p className="text-xs text-muted-foreground">{t.necessaryText}</p></div>
+            <span className="text-xs font-semibold text-primary">ON</span>
+          </div>
+          <label className="flex cursor-pointer items-start justify-between gap-4">
+            <span><strong className="text-sm">{t.external}</strong><span className="block text-xs text-muted-foreground">{t.externalText}</span></span>
+            <input type="checkbox" checked={external} onChange={(event) => setExternal(event.target.checked)} className="mt-1 h-5 w-5 accent-primary" />
+          </label>
+        </div>
+      )}
+      <div className="mt-5 flex flex-wrap gap-2">
+        {customising ? (
+          <button type="button" className="btn btn-primary" onClick={() => choose(external)}>{t.save}</button>
+        ) : (
+          <>
+            <button type="button" className="btn btn-primary" onClick={() => choose(true)}>{t.accept}</button>
+            <button type="button" className="btn btn-outline" onClick={() => choose(false)}>{t.reject}</button>
+            <button type="button" className="btn btn-outline" onClick={() => setCustomising(true)}><Settings2 aria-hidden="true" size={16} />{t.customise}</button>
+          </>
+        )}
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,155 @@
+@import "@fontsource/manrope/latin-400.css";
+@import "@fontsource/manrope/latin-ext-400.css";
+@import "@fontsource/manrope/latin-500.css";
+@import "@fontsource/manrope/latin-ext-500.css";
+@import "@fontsource/manrope/latin-600.css";
+@import "@fontsource/manrope/latin-ext-600.css";
+@import "@fontsource/manrope/latin-700.css";
+@import "@fontsource/manrope/latin-ext-700.css";
+@import "@fontsource/sora/latin-500.css";
+@import "@fontsource/sora/latin-ext-500.css";
+@import "@fontsource/sora/latin-600.css";
+@import "@fontsource/sora/latin-ext-600.css";
+@import "@fontsource/sora/latin-700.css";
+@import "@fontsource/sora/latin-ext-700.css";
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-sky: var(--sky);
+  --color-steel: var(--steel);
+}
+
+:root {
+  /* Paleta alinhada à logótipo JGM: azul elétrico, laranja solar, prata e preto. */
+  --radius: 0.25rem;
+  --background: #ffffff;
+  --foreground: #0a0c10;
+  --card: #f2f5f8;
+  --card-foreground: #0a0c10;
+  --popover: #ffffff;
+  --popover-foreground: #0a0c10;
+  --primary: #f0840c;
+  --primary-foreground: #0a0c10;
+  --secondary: #f2f5f8;
+  --secondary-foreground: #0a0c10;
+  --muted: #f2f5f8;
+  --muted-foreground: #525866;
+  --accent: #00b4f0;
+  --accent-foreground: #0a0c10;
+  --destructive: #d62828;
+  --destructive-foreground: #ffffff;
+  --border: #d7dde5;
+  --input: #d7dde5;
+  --ring: #f0840c;
+  --ink: #0a0c10;
+  --ink-foreground: #f5f7fa;
+  --ink-muted: #c8c8d0;
+  --sky: #00b4f0;
+  --steel: #9c9ca8;
+  --brand-blue: #0078e4;
+  --brand-blue-deep: #003ccc;
+  --brand-orange-bright: #fca80c;
+  --brand-gradient-cta: linear-gradient(135deg, #fca80c 0%, #f0840c 48%, #e86a08 100%);
+  --brand-gradient-sky: linear-gradient(135deg, #00b4f0 0%, #0078e4 55%, #003ccc 100%);
+  --shade-hero: linear-gradient(180deg, rgb(10 12 16 / 0.62) 0%, rgb(10 12 16 / 0.28) 42%, rgb(10 12 16 / 0.88) 100%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@utility shade-hero { background: var(--shade-hero); }
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+@utility container-x { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 1.25rem; @media (min-width: 768px) { padding-inline: 2.5rem; } }
+@utility btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 3rem; padding: 0 1.5rem; border-radius: var(--radius);
+  font-family: var(--font-display); font-weight: 600; font-size: 0.9375rem;
+  transition: background-color .25s, color .25s, transform .25s, border-color .25s, filter .25s, box-shadow .25s;
+  &:active { transform: translateY(1px); }
+}
+@utility btn-primary {
+  background: var(--brand-gradient-cta);
+  color: var(--primary-foreground);
+  box-shadow: 0 10px 24px rgb(240 132 12 / 0.28);
+  &:hover { filter: brightness(1.06); }
+}
+@utility btn-ghost-light {
+  border: 1px solid color-mix(in oklab, var(--ink-foreground) 45%, transparent); color: var(--ink-foreground);
+  &:hover { background: color-mix(in oklab, var(--ink-foreground) 12%, transparent); border-color: var(--sky); }
+}
+@utility btn-outline {
+  border: 1px solid var(--foreground); color: var(--foreground);
+  &:hover { background: var(--foreground); color: var(--background); }
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes slowzoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+@utility animate-rise { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
+@utility animate-slowzoom { animation: slowzoom 2.4s cubic-bezier(.2,.7,.2,1) both; }
+
+/* Wordmark alinhado ao prata metálico da logótipo JGM */
+.logo-wordmark {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.logo-wordmark--light {
+  background-image: linear-gradient(180deg, #f2f2f6 0%, #c8c8d0 42%, #8e8e9a 100%);
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.35));
+}
+.logo-wordmark--dark {
+  background-image: linear-gradient(180deg, #5c5c68 0%, #3a3a44 55%, #1f2128 100%);
+}
