@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate, useParams } from "@tanstack/react-router";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Menu, X, ArrowRight, Plus, Minus, ChevronDown, MapPin } from "lucide-react";
+import { Menu, X, ArrowRight, Plus, Minus, ChevronDown, MapPin, Instagram, Facebook } from "lucide-react";
 import {
   COMPANY, DICT, LANGS, PAGE_SLUGS, SERVICE_IDS, SERVICE_SLUGS, isLang, pageKeyFromSlug, serviceFromSlug, type Lang, type ServiceId,
 } from "@/i18n/content";
@@ -231,6 +231,39 @@ export function Footer() {
           <Logo light size="footer" />
           <p className="mt-5 text-sm text-ink-muted">{t.footer.desc}</p>
           <p className="mt-4 text-xs leading-relaxed text-ink-muted">{COMPANY.legal}<br />NIF {COMPANY.nif}</p>
+          {(SITE_CONFIG.socialUrls.instagram || SITE_CONFIG.socialUrls.facebook) && (
+            <div className="mt-5">
+              <p className="text-xs font-semibold uppercase tracking-wider text-sky">{t.footer.social}</p>
+              <ul className="mt-3 flex items-center gap-3">
+                {SITE_CONFIG.socialUrls.instagram && (
+                  <li>
+                    <a
+                      href={SITE_CONFIG.socialUrls.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-ink-foreground/15 text-ink-foreground transition hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+                      aria-label={t.footer.instagram}
+                    >
+                      <Instagram aria-hidden="true" size={18} strokeWidth={1.75} />
+                    </a>
+                  </li>
+                )}
+                {SITE_CONFIG.socialUrls.facebook && (
+                  <li>
+                    <a
+                      href={SITE_CONFIG.socialUrls.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-ink-foreground/15 text-ink-foreground transition hover:border-sky hover:text-sky focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky"
+                      aria-label={t.footer.facebook}
+                    >
+                      <Facebook aria-hidden="true" size={18} strokeWidth={1.75} />
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
         <div>
           <h3 className="eyebrow text-sky">{t.footer.services}</h3>

@@ -9,15 +9,20 @@ Informações necessárias para fechos editoriais, legais ou de produto. **Não 
 | 3 | Email / contacto de privacidade | Páginas legais e RGPD | Política de Privacidade, direitos dos titulares |
 | 4 | Prazos de conservação dos dados do formulário | Conformidade | Textos legais; retenção no fornecedor |
 | 5 | Revisão jurídica de privacidade, cookies e termos | Risco legal | Remoção do aviso “sujeito a validação jurídica” |
-| 6 | Telefone comercial (se existir) | Conversão e confiança | Contactos, schema, footer |
+| 6 | Telefone comercial adicional (voz) além do WhatsApp | Conversão e confiança | Contactos, schema, footer |
 | 7 | Área de intervenção confirmada (concelhos / regiões) | Posicionamento sem inventar | FAQ, Sobre, SEO local |
 | 8 | Quais serviços estão operacionais *hoje* (ex.: LSF, construção de edifícios) | Credibilidade | Páginas de serviço; possível desativação |
 | 9 | Fotografias reais de obras + autorização de uso | Portefólio | Secção de imagens; alts; eventual CMS |
-| 10 | URL Google Reviews e redes sociais oficiais | Prova social sem inventar | Footer; schema `sameAs` |
+| 10 | URL Google Reviews | Prova social sem inventar | Footer; schema |
 | 11 | Manter candidaturas textuais ativas? | Privacidade / expectativa | Página carreiras; `RECRUITMENT_RECIPIENT` |
 | 12 | Domínio final, HTTPS e rate limiting no edge | Produção segura | Deploy, HSTS, anti-spam |
 | 13 | Analytics com consentimento? | Se necessário medir conversão | Banner de consentimento; categorias |
-| 14 | WhatsApp / outros canais oficiais | Conversão | Contactos; política de privacidade |
+
+### Confirmado e ligado no código
+
+- WhatsApp: `+351 911 040 509` → `src/config/contacts.ts`
+- Instagram: https://www.instagram.com/jgm_remodelacoes_e_pinturas/
+- Facebook: https://www.facebook.com/profile.php?id=61560446386054
 
 ## Serviços anunciados — validação recomendada
 

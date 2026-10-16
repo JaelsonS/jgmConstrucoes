@@ -2,6 +2,15 @@
 
 Registo das alterações desta passagem de produto (outubro 2026). Distingue tipo de mudança.
 
+## Assistente comercial, cookies e contactos (passagem seguinte)
+
+- Preferências de cookies: nomenclatura corrigida; botão discreto inferior esquerdo; categorias reais (necessários + mapa).
+- Assistente virtual comercial (FSM) em PT/EN/ES com encaminhamento WhatsApp pré-preenchido.
+- Contacto WhatsApp oficial `+351 911 040 509` e redes Instagram/Facebook no footer + schema `sameAs`.
+- Documentação: [`SALES-ASSISTANT-AND-CONSENT.md`](SALES-ASSISTANT-AND-CONSENT.md).
+- Testes: `src/test/assistant-and-consent.test.ts`.
+- **Não publicado automaticamente em produção.**
+
 ## Conteúdo e marca
 
 - Reposicionamento editorial: sede em Adémia/Coimbra sem limitar a marca a “só Coimbra”.

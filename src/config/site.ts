@@ -1,3 +1,5 @@
+import { CONTACTS } from "@/config/contacts";
+
 export const SITE_CONFIG = {
   canonicalOrigin:
     import.meta.env["VITE_SITE_URL"] || "https://jgmconstrucoes.com",
@@ -5,8 +7,8 @@ export const SITE_CONFIG = {
   complaintsUrl: "https://www.livroreclamacoes.pt/",
   googleReviewUrl: "",
   socialUrls: {
-    facebook: "",
-    instagram: "",
+    facebook: CONTACTS.social.facebook,
+    instagram: CONTACTS.social.instagram,
     linkedin: "",
   },
   launchYear: 2026,

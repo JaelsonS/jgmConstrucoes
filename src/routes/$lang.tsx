@@ -2,6 +2,7 @@ import { createFileRoute, notFound, Outlet } from "@tanstack/react-router";
 import { isLang } from "@/i18n/content";
 import { Footer, Header } from "@/components/site";
 import { ConsentManager } from "@/components/consent";
+import { SalesAssistant } from "@/components/sales-assistant";
 
 export const Route = createFileRoute("/$lang")({
   beforeLoad: ({ params }) => {
@@ -13,6 +14,7 @@ export const Route = createFileRoute("/$lang")({
       <main id="main"><Outlet /></main>
       <Footer />
       <ConsentManager />
+      <SalesAssistant />
     </>
   ),
 });

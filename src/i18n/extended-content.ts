@@ -54,6 +54,8 @@ type ExtraContent = {
     externalText: string;
     mapBlocked: string;
     loadMap: string;
+    reopen: string;
+    close: string;
   };
 };
 
@@ -76,7 +78,7 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       cookies: [
         { title: "Tecnologias necessárias", paragraphs: ["A preferência de consentimento é guardada localmente no navegador para recordar a escolha. Esta informação não identifica diretamente o visitante."] },
         { title: "Conteúdo externo", paragraphs: ["O mapa da Google só é carregado depois de o visitante autorizar conteúdo externo. Esse fornecedor poderá tratar dados técnicos de acordo com as respetivas políticas."] },
-        { title: "Alterar a escolha", paragraphs: ["As preferências podem ser reabertas no footer a qualquer momento. Não existem atualmente categorias de publicidade ou analytics ativas no website."] },
+        { title: "Alterar a escolha", paragraphs: ["As preferências de cookies podem ser reabertas a qualquer momento pelo botão discreto no canto inferior esquerdo ou pelo link no footer. Não existem atualmente categorias de publicidade ou analytics ativas no website."] },
       ],
       terms: [
         { title: "Finalidade do website", paragraphs: ["Este website apresenta a JGM e os seus serviços. A informação disponibilizada não constitui orçamento, contrato, garantia técnica ou aconselhamento para um projeto específico."] },
@@ -177,7 +179,7 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
         },
       ],
     },
-    consent: { title: "Mapa e privacidade", text: "O site guarda a sua escolha neste navegador. O mapa da Google, na página de contactos, só carrega se o autorizar.", accept: "Permitir o mapa", reject: "Sem mapa", customise: "Ver opções", save: "Guardar escolha", necessary: "Necessário ao site", necessaryText: "Guarda esta escolha para não voltar a perguntar em cada visita.", external: "Mapa da Google", externalText: "Carrega o mapa na página de contactos. A Google pode tratar dados técnicos segundo as regras dela.", mapBlocked: "O mapa está desligado. A morada continua escrita na página.", loadMap: "Permitir e mostrar o mapa" },
+    consent: { title: "Preferências de cookies", text: "Utilizamos cookies e armazenamento local estritamente necessários para recordar a sua escolha neste navegador. O mapa da Google, na página de contactos, só carrega se o autorizar. Não utilizamos cookies de publicidade nem analytics neste website.", accept: "Aceitar cookies necessários e mapa", reject: "Apenas cookies necessários", customise: "Personalizar", save: "Guardar preferências", necessary: "Cookies necessários", necessaryText: "Guardam esta escolha no navegador para não voltar a perguntar em cada visita. São sempre ativos.", external: "Conteúdo externo (mapa Google)", externalText: "Carrega o mapa na página de contactos. A Google pode tratar dados técnicos segundo as regras dela.", mapBlocked: "O mapa está desligado. A morada continua escrita na página.", loadMap: "Permitir e mostrar o mapa", reopen: "Preferências de cookies", close: "Fechar preferências de cookies" },
   },
   en: {
     pages: {
@@ -197,7 +199,7 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       cookies: [
         { title: "Necessary technology", paragraphs: ["Your consent preference is stored locally in the browser. This information does not directly identify you."] },
         { title: "External content", paragraphs: ["Google Maps is loaded only after external-content consent. Google may process technical data under its own policies."] },
-        { title: "Changing your choice", paragraphs: ["Preferences can be reopened from the footer at any time. No advertising or analytics categories are currently active."] },
+        { title: "Changing your choice", paragraphs: ["Cookie preferences can be reopened at any time via the discreet control at the bottom left or the footer link. No advertising or analytics categories are currently active."] },
       ],
       terms: [
         { title: "Website purpose", paragraphs: ["This website presents JGM and its services. Its content is not a quote, contract, technical warranty or advice for a specific project."] },
@@ -298,7 +300,7 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
         },
       ],
     },
-    consent: { title: "Map and privacy", text: "The site stores your choice in this browser. The Google map on the contact page loads only if you allow it.", accept: "Allow the map", reject: "No map", customise: "See options", save: "Save choice", necessary: "Needed for the site", necessaryText: "Stores this choice so the question is not asked on every visit.", external: "Google map", externalText: "Loads the map on the contact page. Google may process technical data under its own rules.", mapBlocked: "The map is off. The address is still written on the page.", loadMap: "Allow and show the map" },
+    consent: { title: "Cookie preferences", text: "We use strictly necessary cookies and local storage to remember your choice in this browser. The Google map on the contact page loads only if you allow it. We do not use advertising or analytics cookies on this website.", accept: "Accept necessary cookies and map", reject: "Necessary cookies only", customise: "Customise", save: "Save preferences", necessary: "Necessary cookies", necessaryText: "Store this choice in the browser so we do not ask again on every visit. Always on.", external: "External content (Google map)", externalText: "Loads the map on the contact page. Google may process technical data under its own rules.", mapBlocked: "The map is off. The address is still written on the page.", loadMap: "Allow and show the map", reopen: "Cookie preferences", close: "Close cookie preferences" },
   },
   es: {
     pages: {
@@ -318,7 +320,7 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
       cookies: [
         { title: "Tecnología necesaria", paragraphs: ["La preferencia de consentimiento se guarda localmente en el navegador y no identifica directamente al visitante."] },
         { title: "Contenido externo", paragraphs: ["Google Maps solo se carga tras autorizar contenido externo y podrá tratar datos técnicos según sus políticas."] },
-        { title: "Cambiar la elección", paragraphs: ["Las preferencias pueden reabrirse desde el pie de página. Actualmente no hay categorías de publicidad o analítica activas."] },
+        { title: "Cambiar la elección", paragraphs: ["Las preferencias de cookies pueden reabrirse en cualquier momento con el control discreto de la esquina inferior izquierda o el enlace del pie de página. Actualmente no hay categorías de publicidad o analítica activas."] },
       ],
       terms: [
         { title: "Finalidad del sitio", paragraphs: ["Este sitio presenta JGM y sus servicios. La información no constituye presupuesto, contrato, garantía técnica ni asesoramiento para un proyecto concreto."] },
@@ -419,7 +421,7 @@ export const EXTRA_CONTENT: Record<Lang, ExtraContent> = {
         },
       ],
     },
-    consent: { title: "Mapa y privacidad", text: "El sitio guarda su elección en este navegador. El mapa de Google, en la página de contacto, solo se carga si lo autoriza.", accept: "Permitir el mapa", reject: "Sin mapa", customise: "Ver opciones", save: "Guardar elección", necessary: "Necesario para el sitio", necessaryText: "Guarda esta elección para no volver a preguntar en cada visita.", external: "Mapa de Google", externalText: "Carga el mapa en la página de contacto. Google puede tratar datos técnicos según sus propias reglas.", mapBlocked: "El mapa está desactivado. La dirección sigue escrita en la página.", loadMap: "Permitir y mostrar el mapa" },
+    consent: { title: "Preferencias de cookies", text: "Utilizamos cookies y almacenamiento local estrictamente necesarios para recordar su elección en este navegador. El mapa de Google, en la página de contacto, solo se carga si lo autoriza. No utilizamos cookies de publicidad ni de analítica en este sitio.", accept: "Aceptar cookies necesarias y mapa", reject: "Solo cookies necesarias", customise: "Personalizar", save: "Guardar preferencias", necessary: "Cookies necesarias", necessaryText: "Guardan esta elección en el navegador para no volver a preguntar en cada visita. Siempre activas.", external: "Contenido externo (mapa de Google)", externalText: "Carga el mapa en la página de contacto. Google puede tratar datos técnicos según sus propias reglas.", mapBlocked: "El mapa está desactivado. La dirección sigue escrita en la página.", loadMap: "Permitir y mostrar el mapa", reopen: "Preferencias de cookies", close: "Cerrar preferencias de cookies" },
   },
 };
 

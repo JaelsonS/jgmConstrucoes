@@ -95,6 +95,7 @@ type Dict = {
   service: { problems: string; benefits: string; process: string; faq: string; related: string; cta: string; ctaText: string; illustrative: string };
   contact: {
     metaTitle: string; metaDesc: string; label: string; h1: string; lead: string; address: string; legal: string;
+    whatsapp: string; whatsappCta: string;
     form: {
       name: string; email: string; phone: string; optional: string; service: string; choose: string; other: string;
       location: string; message: string; submit: string; pending: string; required: string; invalidEmail: string; privacy: string;
@@ -105,7 +106,10 @@ type Dict = {
   ui: { breadcrumb: string };
   faqPage: { metaTitle: string; metaDesc: string; label: string; h1: string; lead: string };
   faqs: Faq[];
-  footer: { desc: string; services: string; company: string; legal: string; privacy: string; cookies: string; preferences: string; terms: string; careers: string; complaints: string; review: string; rights: string; credit: string; soon: string };
+  footer: {
+    desc: string; services: string; company: string; legal: string; privacy: string; cookies: string; preferences: string; terms: string; careers: string; complaints: string; review: string; rights: string; credit: string; soon: string;
+    social: string; instagram: string; facebook: string;
+  };
   illustrative: string;
   services: Record<ServiceId, ServiceContent>;
 };
@@ -179,6 +183,7 @@ const pt: Dict = {
     label: "Contactos", h1: "Descreva a obra e peça orçamento",
     lead: "Quanto mais claro for o pedido — tipo de trabalho, localização do imóvel e o que pretende alterar — mais útil pode ser a resposta. Não precisa de medidas exatas nesta fase.",
     address: "Morada", legal: "Dados da empresa",
+    whatsapp: "WhatsApp", whatsappCta: "Falar no WhatsApp",
     form: { name: "Nome", email: "Email", phone: "Telefone", optional: "opcional", service: "Tipo de trabalho", choose: "Escolha um tipo de trabalho", other: "Outro", location: "Localização do imóvel", message: "O que pretende fazer", submit: "Enviar pedido de orçamento", pending: "O envio online ainda não está disponível.", required: "Preencha este campo.", invalidEmail: "Esse email não parece válido.", privacy: "Os dados servem apenas para responder a este pedido. O responsável pelo tratamento é a JGM - Remodelações e Pinturas, Unipessoal Lda.", sending: "A enviar…", success: "Recebemos o pedido. A resposta usa os dados que indicou.", error: "O pedido não foi enviado. Verifique os dados e tente outra vez." },
   },
   faqPage: { metaTitle: "Perguntas frequentes — JGM Construções", metaDesc: "Como pedir orçamento, que informação enviar, que trabalhos existem e como a JGM analisa a localização da obra.", label: "Perguntas", h1: "Perguntas frequentes", lead: "Respostas diretas sobre o pedido de orçamento, os trabalhos e a área de intervenção." },
@@ -192,7 +197,7 @@ const pt: Dict = {
     { q: "Em que zona trabalham?", a: "A sede é em Adémia, Coimbra, e os pedidos são tratados a partir daí e da região. Fora dessa área, cada pedido é analisado caso a caso — sem compromisso prévio de aceitar a obra." },
     { q: "O site mostra obras já feitas?", a: "Não. As fotografias são ilustrativas. Não publicamos obras, prazos nem preços enquanto não estiverem confirmados para cada pedido." },
   ],
-  footer: { desc: "Construção, remodelações e acabamentos. Sede em Adémia, Coimbra.", services: "Serviços", company: "Empresa", legal: "Informação legal", privacy: "Política de Privacidade", cookies: "Política de Cookies", preferences: "Preferências de cookies", terms: "Termos e Condições", careers: "Candidaturas espontâneas", complaints: "Livro de Reclamações", review: "Avaliar no Google", rights: "Todos os direitos reservados.", credit: "Website desenvolvido pela", soon: "em breve" },
+  footer: { desc: "Construção, remodelações e acabamentos. Sede em Adémia, Coimbra.", services: "Serviços", company: "Empresa", legal: "Informação legal", privacy: "Política de Privacidade", cookies: "Política de Cookies", preferences: "Preferências de cookies", terms: "Termos e Condições", careers: "Candidaturas espontâneas", complaints: "Livro de Reclamações", review: "Avaliar no Google", rights: "Todos os direitos reservados.", credit: "Website desenvolvido pela", soon: "em breve", social: "Redes sociais", instagram: "Instagram da JGM", facebook: "Facebook da JGM" },
   errors: { notFoundTitle: "Página não encontrada", notFoundText: "A página que procura não existe ou foi movida.", notFoundCta: "Voltar ao início", loadTitle: "Não foi possível carregar esta página", loadText: "Ocorreu um erro. Tente novamente ou volte ao início.", retry: "Tentar novamente", home: "Voltar ao início" },
   ui: { breadcrumb: "Navegação" },
   illustrative: "Imagem ilustrativa",
@@ -354,6 +359,7 @@ const en: Dict = {
     label: "Contact", h1: "Describe the job and ask for a quote",
     lead: "The clearer the request — type of work, property location and what you want changed — the more useful the reply can be. Exact measurements are not needed at this stage.",
     address: "Address", legal: "Company details",
+    whatsapp: "WhatsApp", whatsappCta: "Chat on WhatsApp",
     form: { name: "Name", email: "Email", phone: "Phone", optional: "optional", service: "Type of work", choose: "Choose a type of work", other: "Other", location: "Property location", message: "What you want done", submit: "Send quote request", pending: "Online sending is not available yet.", required: "Fill in this field.", invalidEmail: "That email does not look valid.", privacy: "The details are used only to reply to this request. The controller is JGM - Remodelações e Pinturas, Unipessoal Lda.", sending: "Sending…", success: "We received the request. Any reply will use the details you gave.", error: "The request was not sent. Check the details and try again." },
   },
   faqPage: { metaTitle: "Questions — JGM Construções", metaDesc: "How to ask for a quote, what to send, which jobs are listed and how JGM reviews the property location.", label: "Questions", h1: "Questions", lead: "Direct answers about the quote, the work and the service area." },
@@ -367,7 +373,7 @@ const en: Dict = {
     { q: "Where do you work?", a: "The office is in Adémia, Coimbra, and requests are handled from there and the surrounding area. Outside that area, each request is reviewed case by case — with no prior commitment to take the job." },
     { q: "Does the site show finished jobs?", a: "No. The photographs are illustrative. We do not publish jobs, timings or prices until they are confirmed for each request." },
   ],
-  footer: { desc: "Building, renovations and finishes. Based in Adémia, Coimbra.", services: "Services", company: "Company", legal: "Legal", privacy: "Privacy policy", cookies: "Cookie policy", preferences: "Cookie preferences", terms: "Terms and conditions", careers: "Speculative applications", complaints: "Complaints book", review: "Review on Google", rights: "All rights reserved.", credit: "Website by", soon: "coming soon" },
+  footer: { desc: "Building, renovations and finishes. Based in Adémia, Coimbra.", services: "Services", company: "Company", legal: "Legal", privacy: "Privacy policy", cookies: "Cookie policy", preferences: "Cookie preferences", terms: "Terms and conditions", careers: "Speculative applications", complaints: "Complaints book", review: "Review on Google", rights: "All rights reserved.", credit: "Website by", soon: "coming soon", social: "Social media", instagram: "JGM Instagram", facebook: "JGM Facebook" },
   errors: { notFoundTitle: "Page not found", notFoundText: "The page you are looking for does not exist or has been moved.", notFoundCta: "Go home", loadTitle: "This page did not load", loadText: "Something went wrong. Try again or return home.", retry: "Try again", home: "Go home" },
   ui: { breadcrumb: "Breadcrumb" },
   illustrative: "Illustrative image",
@@ -528,6 +534,7 @@ const es: Dict = {
     label: "Contacto", h1: "Describa la obra y pida presupuesto",
     lead: "Cuanto más clara sea la solicitud — tipo de trabajo, ubicación del inmueble y lo que quiere cambiar — más útil puede ser la respuesta. En esta fase no hacen falta medidas exactas.",
     address: "Dirección", legal: "Datos de la empresa",
+    whatsapp: "WhatsApp", whatsappCta: "Hablar por WhatsApp",
     form: { name: "Nombre", email: "Correo electrónico", phone: "Teléfono", optional: "opcional", service: "Tipo de trabajo", choose: "Elija un tipo de trabajo", other: "Otro", location: "Ubicación del inmueble", message: "Qué quiere hacer", submit: "Enviar solicitud de presupuesto", pending: "El envío en línea todavía no está disponible.", required: "Rellene este campo.", invalidEmail: "Ese correo no parece válido.", privacy: "Los datos sirven solo para responder a esta solicitud. El responsable del tratamiento es JGM - Remodelações e Pinturas, Unipessoal Lda.", sending: "Enviando…", success: "Hemos recibido la solicitud. La respuesta usa los datos que indicó.", error: "La solicitud no se ha enviado. Revise los datos e inténtelo de nuevo." },
   },
   faqPage: { metaTitle: "Preguntas frecuentes — JGM Construções", metaDesc: "Cómo pedir presupuesto, qué información enviar, qué trabajos hay y cómo JGM analiza la ubicación de la obra.", label: "Preguntas", h1: "Preguntas frecuentes", lead: "Respuestas directas sobre el presupuesto, los trabajos y el área de intervención." },
@@ -541,7 +548,7 @@ const es: Dict = {
     { q: "¿En qué zona trabajan?", a: "La sede está en Adémia, Coímbra, y las solicitudes se tratan desde ahí y de la región. Fuera de esa zona, cada solicitud se estudia caso a caso — sin compromiso previo de aceptar la obra." },
     { q: "¿El sitio muestra obras ya hechas?", a: "No. Las fotografías son ilustrativas. No publicamos obras, plazos ni precios mientras no estén confirmados para cada solicitud." },
   ],
-  footer: { desc: "Construcción, reformas y acabados. Sede en Adémia, Coímbra.", services: "Servicios", company: "Empresa", legal: "Información legal", privacy: "Política de privacidad", cookies: "Política de cookies", preferences: "Preferencias de cookies", terms: "Términos y condiciones", careers: "Candidaturas espontáneas", complaints: "Libro de reclamaciones", review: "Valorar en Google", rights: "Todos los derechos reservados.", credit: "Sitio web desarrollado por", soon: "próximamente" },
+  footer: { desc: "Construcción, reformas y acabados. Sede en Adémia, Coímbra.", services: "Servicios", company: "Empresa", legal: "Información legal", privacy: "Política de privacidad", cookies: "Política de cookies", preferences: "Preferencias de cookies", terms: "Términos y condiciones", careers: "Candidaturas espontáneas", complaints: "Libro de reclamaciones", review: "Valorar en Google", rights: "Todos los derechos reservados.", credit: "Sitio web desarrollado por", soon: "próximamente", social: "Redes sociales", instagram: "Instagram de JGM", facebook: "Facebook de JGM" },
   errors: { notFoundTitle: "Página no encontrada", notFoundText: "La página que busca no existe o ha cambiado de dirección.", notFoundCta: "Volver al inicio", loadTitle: "No se pudo cargar esta página", loadText: "Se produjo un error. Inténtelo de nuevo o vuelva al inicio.", retry: "Intentar de nuevo", home: "Volver al inicio" },
   ui: { breadcrumb: "Navegación" },
   illustrative: "Imagen ilustrativa",

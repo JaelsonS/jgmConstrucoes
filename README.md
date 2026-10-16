@@ -89,6 +89,7 @@ Detalhes: [`docs/DEPLOYMENT-AND-ENVIRONMENT.md`](docs/DEPLOYMENT-AND-ENVIRONMENT
 | [`docs/BRAND.md`](docs/BRAND.md) | Identidade visual |
 | [`docs/OPERATIONS.md`](docs/OPERATIONS.md) | Operação / incidentes |
 | [`docs/ROADMAP.md`](docs/ROADMAP.md) | Evolução faseada |
+| [`docs/SALES-ASSISTANT-AND-CONSENT.md`](docs/SALES-ASSISTANT-AND-CONSENT.md) | Assistente, WhatsApp, cookies, redes |
 
 ## Problemas comuns
 

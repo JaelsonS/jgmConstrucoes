@@ -1,6 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { ArrowRight, MapPin, Building2, FileLock2, LoaderCircle } from "lucide-react";
+import { ArrowRight, MapPin, Building2, FileLock2, LoaderCircle, MessageCircle } from "lucide-react";
 import { COMPANY, DICT, SERVICE_IDS, isLang, pageKeyFromSlug, pagePaths, seoHead, type Lang, type PageKey, type ServiceId } from "@/i18n/content";
 import { CtaBand, Faqs, PageHero, Reveal, pageHref, serviceHref } from "@/components/site";
 import { StageImage } from "@/components/photo";
@@ -10,6 +10,9 @@ import { CONTACT_SERVICES } from "@/lib/contact-schema";
 import { sendContactRequest } from "@/lib/contact.server";
 import { sendCareerInterest } from "@/lib/career.server";
 import { STAGES, type StagePhoto } from "@/lib/photos";
+import { ASSISTANT_CONTENT } from "@/i18n/assistant-content";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { CONTACTS } from "@/config/contacts";
 
 const SERVICE_PAGE_IMG: Record<ServiceId, StagePhoto> = {
   buildings: STAGES[3], lsf: STAGES[1], renovations: STAGES[3], painting: STAGES[2], coverings: STAGES[0],
@@ -245,6 +248,21 @@ function Contact({ lang }: { lang: Lang }) {
       </form>
       <aside className="space-y-8">
         <div><h2 className="flex items-center gap-2 font-display font-semibold"><MapPin aria-hidden="true" size={18} className="text-primary-text" />{t.contact.address}</h2><address className="mt-3 not-italic text-muted-foreground">{COMPANY.address.map((a) => <span key={a}>{a}<br /></span>)}</address></div>
+        <div>
+          <h2 className="flex items-center gap-2 font-display font-semibold">
+            <MessageCircle aria-hidden="true" size={18} className="text-primary-text" />
+            {t.contact.whatsapp}
+          </h2>
+          <p className="mt-3 text-muted-foreground">{CONTACTS.whatsappDisplay}</p>
+          <a
+            href={buildWhatsAppUrl(ASSISTANT_CONTENT[lang].whatsapp.direct) ?? undefined}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-outline mt-4"
+          >
+            {t.contact.whatsappCta}
+          </a>
+        </div>
         <div><h2 className="flex items-center gap-2 font-display font-semibold"><Building2 aria-hidden="true" size={18} className="text-primary-text" />{t.contact.legal}</h2><p className="mt-3 text-muted-foreground">{COMPANY.legal}<br />NIF {COMPANY.nif}</p></div>
         {preferences?.external ? (
           <iframe title={t.contact.address} className="aspect-square w-full rounded-sm border border-border" loading="lazy" referrerPolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Beco+dos+Travassos+20+Ad%C3%A9mia+Coimbra&output=embed" />

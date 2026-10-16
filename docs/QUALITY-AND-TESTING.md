@@ -25,11 +25,12 @@ Ficheiros em `src/test/`:
 1. **Rotas:** `/pt`, `/en`, `/es` e uma página de serviço em cada idioma.
 2. **Idioma:** mudar bandeira a meio de um serviço → slug traduzido.
 3. **Formulário:** sem env vars → erro; com env vars → aceite pelo fornecedor (não confundir com entrega na inbox).
-4. **Consentimento:** mapa só após “carregar mapa” / aceitar externos.
-5. **Animação:** scroll na homepage; com “reduce motion” → estágio final estático.
-6. **Responsivo:** 320, 390, 768, 1440.
-7. **Teclado:** menu, FAQ, formulário, skip link.
-8. **SEO:** view-source de title/description/hreflang.
+4. **Consentimento:** mapa só após “carregar mapa” / aceitar externos; botão esquerdo reabre preferências de cookies.
+5. **Assistente:** idioma → fluxo → resumo → WhatsApp; contacto direto sem questionário; ver [`SALES-ASSISTANT-AND-CONSENT.md`](SALES-ASSISTANT-AND-CONSENT.md).
+6. **Animação:** scroll na homepage; com “reduce motion” → estágio final estático.
+7. **Responsivo:** 320, 390, 768, 1440.
+8. **Teclado:** menu, FAQ, formulário, skip link, assistente, preferências de cookies.
+9. **SEO:** view-source de title/description/hreflang.
 
 ## Desempenho
 

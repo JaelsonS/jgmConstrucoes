@@ -10,13 +10,18 @@ Documentação complementar: [`PROJECT-STRUCTURE.md`](PROJECT-STRUCTURE.md), [`D
 
 - `src/routes/`: rotas TanStack Start, páginas e metadados.
 - `src/components/site.tsx`: header, footer, heróis, FAQ e componentes estruturais.
-- `src/components/consent.tsx`: preferências locais e controlo de conteúdo externo.
+- `src/components/consent.tsx`: preferências de cookies, gate do mapa e botão discreto de reabertura.
+- `src/components/sales-assistant.tsx`: assistente comercial guiado (canto inferior direito).
 - `src/i18n/content.ts`: navegação, homepage, serviços e helpers de URLs/SEO.
 - `src/i18n/extended-content.ts`: legais, consentimento, carreiras e blog.
+- `src/i18n/assistant-content.ts`: copy PT/EN/ES do assistente e mensagens WhatsApp.
+- `src/lib/assistant/`: máquina de estados e construção de mensagens.
+- `src/lib/whatsapp.ts` + `src/config/contacts.ts`: Click to Chat e contactos oficiais.
 - `src/lib/*.server.ts`: funções exclusivamente server-side para email.
 - `src/lib/*-schema.ts`: contratos Zod partilhados entre UI e servidor.
 - `src/config/site.ts`: domínio, URLs oficiais e ano inicial.
 - `src/config/brand.ts` + `docs/BRAND.md`: paleta e regras da identidade visual.
+- Documentação do fluxo: [`SALES-ASSISTANT-AND-CONSENT.md`](SALES-ASSISTANT-AND-CONSENT.md).
 - `src/assets/brand/`: logótipo completo e emblema com fundo transparente.
 - `public/`: descoberta SEO, favicon, OG, identidade web e manifest.
 

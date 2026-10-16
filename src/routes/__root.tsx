@@ -130,6 +130,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           legalName: "JGM - Remodelações e Pinturas, Unipessoal Lda.",
           url: "https://jgmconstrucoes.com",
           taxID: "517470942",
+          telephone: "+351911040509",
+          sameAs: [
+            SITE_CONFIG.socialUrls.instagram,
+            SITE_CONFIG.socialUrls.facebook,
+          ].filter(Boolean),
           address: {
             "@type": "PostalAddress",
             streetAddress: "Beco dos Travassos, n.º 20, 1.º",

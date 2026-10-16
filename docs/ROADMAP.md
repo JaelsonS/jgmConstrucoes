@@ -65,5 +65,5 @@ Critério de saída: testes de path traversal, ficheiro disfarçado, acesso anó
 
 - Área de cliente: apenas se houver casos de uso e modelo de autorização claros.
 - Orçamentação automática: não implementar sem dados, regras comerciais e revisão humana.
-- Chat/WhatsApp: apenas com canal oficial e análise de privacidade.
+- Chat/WhatsApp: canal oficial ligado (`contacts.ts`); assistente comercial guiado sem IA; evoluir só com requisitos de privacidade/custo se for necessária IA.
 - Geolocalização de obras: nunca publicar moradas de clientes sem autorização explícita.
