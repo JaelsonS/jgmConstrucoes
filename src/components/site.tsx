@@ -25,7 +25,7 @@ export const useT = () => DICT[useLang()];
 export const pageHref = (l: Lang, k: keyof (typeof PAGE_SLUGS)["pt"]) => `/${l}/${PAGE_SLUGS[l][k]}`;
 export const serviceHref = (l: Lang, s: ServiceId) => `/${l}/${PAGE_SLUGS[l].services}/${SERVICE_SLUGS[l][s]}`;
 
-/** Emblema (já contém JGM) + “Construções” colado, no prata metálico da logótipo. */
+/** Emblema JGM (logo enviada, sem CONSTRUÇÕES dentro) + wordmark “Construções”. */
 function Logo({ light = false, size = "header" }: { light?: boolean; size?: "header" | "footer" }) {
   const markClass = size === "footer"
     ? "h-[3.75rem] w-auto shrink-0 drop-shadow-md md:h-[4.5rem]"
@@ -38,7 +38,7 @@ function Logo({ light = false, size = "header" }: { light?: boolean; size?: "hea
     <span className="inline-flex items-center gap-1.5 md:gap-2">
       <picture>
         <source type="image/webp" srcSet={MARK_SRCSET} sizes={markSizes} />
-        <img src={markFallback} alt="" width={192} height={196} decoding="async" className={markClass} />
+        <img src={markFallback} alt="" width={192} height={192} decoding="async" className={markClass} />
       </picture>
       <span
         aria-hidden="true"
